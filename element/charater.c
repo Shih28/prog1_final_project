@@ -21,11 +21,11 @@ Elements *New_Character(int label)
     Elements *pObj = New_Elements(label);
     // setting derived object member
     // load character images
-    char state_string[3][10] = {"stop", "move", "attack"};
-    for (int i = 0; i < 3; i++)
+    char state_string[2][10] = {"stop", "move"};
+    for (int i = 0; i < 2; i++)
     {
         char buffer[50];
-        sprintf(buffer, "assets/image/chara_%s.gif", state_string[i]);
+        sprintf(buffer, "assets/image/char2_%s.gif", state_string[i]);
         pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
     }
     // load effective sound
@@ -129,34 +129,7 @@ void Character_update(Elements *self)
         if (chara->gif_status[chara->state]->done)
             chara->state = STOP;
     }
-    else if (chara->state == ATK)
-    {
-        if (chara->gif_status[chara->state]->done)
-        {
-            chara->state = STOP;
-            chara->new_proj = false;
-        }
-        if (chara->gif_status[ATK]->display_index == 2 && chara->new_proj == false)
-        {
-            Elements *pro;
-            if (chara->dir)
-            {
-                pro = New_Projectile(Projectile_L,
-                                     chara->x + chara->width - 100,
-                                     chara->y + 10,
-                                     5);
-            }
-            else
-            {
-                pro = New_Projectile(Projectile_L,
-                                     chara->x - 50,
-                                     chara->y + 10,
-                                     -5);
-            }
-            _Register_elements(scene, pro);
-            chara->new_proj = true;
-        }
-    }
+    
 }
 void Character_draw(Elements *self)
 {
@@ -165,7 +138,7 @@ void Character_draw(Elements *self)
     ALLEGRO_BITMAP *frame = algif_get_bitmap(chara->gif_status[chara->state], al_get_time());
     if (frame)
     {
-        al_draw_bitmap(frame, chara->x, chara->y, ((chara->dir) ? ALLEGRO_FLIP_HORIZONTAL : 0));
+        al_draw_bitmap(frame, chara->x, chara->y, ((chara->dir) ? 0:ALLEGRO_FLIP_HORIZONTAL));
     }
     if (chara->state == ATK && chara->gif_status[chara->state]->display_index == 2)
     {
@@ -176,7 +149,7 @@ void Character_destory(Elements *self)
 {
     Character *Obj = ((Character *)(self->pDerivedObj));
     al_destroy_sample_instance(Obj->atk_Sound);
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 2; i++)
         algif_destroy_animation(Obj->gif_status[i]);
     free(Obj->hitbox);
     free(Obj);

@@ -24,7 +24,7 @@ Elements *New_CharacterNewton(int label)
     for (int i = 0; i < 2; i++)
     {
         char buffer[50];
-        sprintf(buffer, "assets/image/chara_%s.gif", state_string[i]);
+        sprintf(buffer, "assets/image/char3_%s.gif", state_string[i]);
         pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
     }
     // load effective sound
@@ -106,14 +106,14 @@ void CharacterNewton_draw(Elements *self)
     ALLEGRO_BITMAP *frame = algif_get_bitmap(chara->gif_status[chara->state], al_get_time());
     if (frame)
     {
-        al_draw_bitmap(frame, chara->x, chara->y, ((chara->dir) ? ALLEGRO_FLIP_HORIZONTAL : 0));
+        al_draw_bitmap(frame, chara->x, chara->y, ((chara->dir) ? 0:ALLEGRO_FLIP_HORIZONTAL));
     }
 }
 void CharacterNewton_destory(Elements *self)
 {
     CharacterNewton *Obj = ((CharacterNewton *)(self->pDerivedObj));
     al_destroy_sample_instance(Obj->atk_Sound);
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 2; i++)
         algif_destroy_animation(Obj->gif_status[i]);
     free(Obj->hitbox);
     free(Obj);
