@@ -1,5 +1,6 @@
 #include "couple.h"
 #include "bat.h"
+#include "../shapes/Point.h"
 #include "../shapes/Circle.h"
 #include "../scene/quest_gamescene_lake.h" // for element label
 #include "../scene/sceneManager.h" // for scene variable
@@ -43,20 +44,15 @@ Elements *New_couple(int label, int x, int y, int type)
 void couple_update(Elements *self)
 {
     couple *Obj = ((couple *)(self->pDerivedObj));
-    
+    Obj->img=al_load_bitmap(pic[Obj->type][Obj->status]);
+ 
+
+    if(Obj->hitbox->overlap(New_Point(mouse.x, mouse.y), Obj->hitbox) && mouse_state[1]){
+        Obj->status=1;
+    }
+       if(Obj->status==1) self->dele=true;
 }
 
-void couple_interact_bat(Elements* self, Elements *tar){
-    bat *Bat = (bat*)tar->pDerivedObj;
-    couple *coup = (couple*)self->pDerivedObj;
-
-    if(coup->hitbox->overlap(Bat->hitbox, Bat->hitbox)){
-        coup->status=1;
-        coup->img = al_load_bitmap(pic[coup->type][coup->status]);
-        al_rest(0.5);
-        self->dele=true;
-    }
-}   
 
 void couple_interact(Elements *self)
 {
@@ -67,9 +63,6 @@ void couple_interact(Elements *self)
         
         for (int i = 0; i < labelEle.len; i++)
         {
-            if(inter_label==Bat_L){
-                couple_interact_bat(self, labelEle.arr[i]);
-            }
         }
     }
 }

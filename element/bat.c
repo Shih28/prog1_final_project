@@ -1,5 +1,6 @@
 #include "bat.h"
-#include "../shapes/Circle.h"
+#include "couple.h"
+#include "../shapes/Rectangle.h"
 #include <allegro5/allegro_font.h>
 #include "../scene/quest_gamescene_lake.h" // for element label
 #include "../scene/sceneManager.h" // for scene variable
@@ -23,10 +24,13 @@ Elements *New_bat(int label)
     pDerivedObj->x = mouse.x;
     pDerivedObj->y = mouse.y;
     pDerivedObj->status = 0; //default; 1:attack
-    pDerivedObj->hitbox = New_Circle(pDerivedObj->x + pDerivedObj->width / 2,
-                                     pDerivedObj->y + pDerivedObj->height / 2,
-                                     min(pDerivedObj->width, pDerivedObj->height) / 2);
+    pDerivedObj->hitbox = New_Rectangle(pDerivedObj->x ,
+                                     pDerivedObj->y ,
+                                     pDerivedObj->x + pDerivedObj->width,
+                                      pDerivedObj->y + pDerivedObj->height
+                                    );
     // setting the interact object
+    pObj->inter_obj[pObj->inter_len++]=Couple_L;
    
     // setting derived object function
     pObj->pDerivedObj = pDerivedObj;
@@ -49,8 +53,6 @@ void bat_update(Elements *self)
     
 }
 
-
-
 void bat_interact(Elements *self)
 {
     for (int j = 0; j < self->inter_len; j++)
@@ -60,7 +62,6 @@ void bat_interact(Elements *self)
         
         for (int i = 0; i < labelEle.len; i++)
         {
-            
         }
     }
 }
@@ -68,7 +69,7 @@ void bat_interact(Elements *self)
 void bat_draw(Elements *self)
 {
     bat *Obj = ((bat *)(self->pDerivedObj));
-    al_draw_bitmap(Obj->img, Obj->x, Obj->y, ALLEGRO_ALIGN_CENTRE);
+    al_draw_bitmap(Obj->img, Obj->x, Obj->y, 0);
 }
 void bat_destory(Elements *self)
 {

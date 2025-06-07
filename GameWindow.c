@@ -113,9 +113,12 @@ void game_init(Game *self)
     fps = al_create_timer(1.0 / FPS);
     apple_timer = al_create_timer(1/FPS);
     phys_gamescene_timer = al_create_timer(1/FPS);
+    couple_timer = al_create_timer(1/FPS);
+    lake_gamescene_timer = al_create_timer(1/FPS);
+    
     al_register_event_source(event_queue, al_get_timer_event_source(fps));
     al_start_timer(fps);
-    al_start_timer(apple_timer);
+    
     // initialize the icon on the display
     ALLEGRO_BITMAP *icon = al_load_bitmap("assets/image/icon.jpg");
     al_set_display_icon(self->display, icon);

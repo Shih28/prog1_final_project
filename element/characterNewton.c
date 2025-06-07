@@ -130,7 +130,7 @@ void CharacterNewton_update_position(Elements *self, int dx, int dy)
     hitbox->update_center_y(hitbox, dy);
 }
 
-void CharacterNewton_interact_apple(Elements *self, Elements *tar, int type){
+void CharacterNewton_interact_apple(Elements *self, Elements *tar){
     CharacterNewton *chra = ((CharacterNewton*)self->pDerivedObj);
     apple *app = (apple*)tar->pDerivedObj;
 
@@ -149,10 +149,10 @@ void CharacterNewton_interact(Elements *self) {
         ElementVec labelEle = _Get_label_elements(scene, inter_label);
         for(int j=0; j<labelEle.len; j++){
             if(inter_label==AppleRight_L){
-                CharacterNewton_interact_apple(self, labelEle.arr[j], inter_label);
+                CharacterNewton_interact_apple(self, labelEle.arr[j]);
             }
             else if(inter_label==AppleWrong_L){
-                CharacterNewton_interact_apple(self, labelEle.arr[j], inter_label);
+                CharacterNewton_interact_apple(self, labelEle.arr[j]);
             }
             
         }

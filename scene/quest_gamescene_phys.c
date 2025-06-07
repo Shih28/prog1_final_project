@@ -27,7 +27,9 @@ Scene *New_questGamePhys(int label)
 
     //start timer
     al_set_timer_count(phys_gamescene_timer, 0);
+    al_set_timer_count(apple_timer, 0);
     al_start_timer(phys_gamescene_timer);
+    al_start_timer(apple_timer);
 
     // register element
     _Register_elements(pObj, New_CharacterNewton(CharacterNewton_L));
@@ -126,6 +128,7 @@ void questGamePhys_destroy(Scene *self)
     free(self);
     al_stop_timer(apple_timer);
     al_stop_timer(phys_gamescene_timer);
+    al_stop_timer(apple_timer);
 }
 
 void addApple(Scene* self){
