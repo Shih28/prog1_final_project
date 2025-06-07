@@ -1,5 +1,6 @@
 #include "bat.h"
 #include "couple.h"
+#include "../global.h"
 #include "../shapes/Rectangle.h"
 #include <allegro5/allegro_font.h>
 #include "../scene/quest_gamescene_lake.h" // for element label
@@ -30,7 +31,6 @@ Elements *New_bat(int label)
                                       pDerivedObj->y + pDerivedObj->height
                                     );
     // setting the interact object
-    pObj->inter_obj[pObj->inter_len++]=Couple_L;
    
     // setting derived object function
     pObj->pDerivedObj = pDerivedObj;
@@ -69,7 +69,7 @@ void bat_interact(Elements *self)
 void bat_draw(Elements *self)
 {
     bat *Obj = ((bat *)(self->pDerivedObj));
-    al_draw_bitmap(Obj->img, Obj->x, Obj->y, 0);
+    al_draw_bitmap(Obj->img,max(Obj->x-75,0), max(Obj->y-50,0), 0);
 }
 void bat_destory(Elements *self)
 {

@@ -11,30 +11,32 @@
 /*
    [quest_menu function]
 */
-Scene *New_quest_menu(int label, ALLEGRO_BITMAP *img)
+Scene *New_quest_menu(int label, int next_secene, ALLEGRO_BITMAP *img)
 {
     quest_menu *pDerivedObj = (quest_menu *)malloc(sizeof(quest_menu));
     Scene *pObj = New_Scene(label);
+    pDerivedObj->next_scene=next_secene;
     pDerivedObj->background=img;
     // setting derived object member
-    switch(label){
-        case quest_menu_phys_L:
-            _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_phys_L));
-            break;
-        case quest_menu_2_L:
-            _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_2_L));
-            break;
-        case quest_menu_3_L:
-            _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_3_L));
-            break;
-        case quest_menu_lake_L:
-            _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_lake_L));
-            break;
-        default:
-            printf("menu label out of range: %d\n", label);
-            break;
 
-    }
+    // switch(label){
+    //     case quest_menu_phys_L:
+    //         _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_phys_L));
+    //         break;
+    //     case quest_menu_2_L:
+    //         _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_2_L));
+    //         break;
+    //     case quest_menu_3_L:
+    //         _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_3_L));
+    //         break;
+    //     case quest_menu_lake_L:
+    //         _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_lake_L));
+    //         break;
+    //     default:
+    //         printf("menu label out of range: %d\n", label);
+    //         break;
+
+    // }
     
     pObj->pDerivedObj = pDerivedObj;
     
@@ -68,6 +70,10 @@ void quest_menu_update(Scene *self)
         Elements *ele = allEle.arr[i];
         if (ele->dele)
             _Remove_elements(self, ele);
+    }
+    if(key_state[ALLEGRO_KEY_ENTER]){
+        self->scene_end=true;
+        window = ((quest_menu*)self->pDerivedObj)->next_scene;
     }
 }
 void quest_menu_draw(Scene *self)

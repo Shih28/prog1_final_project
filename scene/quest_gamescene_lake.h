@@ -20,5 +20,6 @@ Scene *New_questGameLake(int label);
 void questGameLake_update(Scene *self);
 void questGamelake_draw(Scene *self);
 void questGameLake_destroy(Scene *self);
+extern int score_of_lake_quest;
 
 #endif

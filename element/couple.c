@@ -21,6 +21,8 @@ Elements *New_couple(int label, int x, int y, int type)
     pDerivedObj->img = al_load_bitmap(pic[type][0]);
     pDerivedObj->width = al_get_bitmap_width(pDerivedObj->img);
     pDerivedObj->height = al_get_bitmap_height(pDerivedObj->img);
+    pDerivedObj->delay_count=0;
+    pDerivedObj->appear_time_count=0;
     pDerivedObj->x = x;
     pDerivedObj->y = y;
     pDerivedObj->type = type;
@@ -30,7 +32,6 @@ Elements *New_couple(int label, int x, int y, int type)
                                      pDerivedObj->y + pDerivedObj->height / 2,
                                      min(pDerivedObj->width, pDerivedObj->height) / 2);
     // setting the interact object
-    pObj->inter_obj[pObj->inter_len++]=Bat_L;
    
     // setting derived object function
     pObj->pDerivedObj = pDerivedObj;
@@ -46,11 +47,15 @@ void couple_update(Elements *self)
     couple *Obj = ((couple *)(self->pDerivedObj));
     Obj->img=al_load_bitmap(pic[Obj->type][Obj->status]);
  
-
+    Obj->appear_time_count++;
     if(Obj->hitbox->overlap(New_Point(mouse.x, mouse.y), Obj->hitbox) && mouse_state[1]){
         Obj->status=1;
+        Obj->appear_time_count=0;
+        if(Obj->delay_count==0) score_of_lake_quest++;
     }
-       if(Obj->status==1) self->dele=true;
+    if(Obj->status==1) Obj->delay_count++;
+    if(Obj->delay_count>=30) self->dele=true;
+    if(Obj->appear_time_count>80) self->dele=true;
 }
 
 
@@ -77,6 +82,8 @@ void couple_destory(Elements *self)
 {
     couple *Obj = ((couple *)(self->pDerivedObj));
     al_destroy_bitmap(Obj->img);
+    al_stop_timer(couple_timer);
+    al_stop_timer(lake_gamescene_timer);
     free(Obj->hitbox);
     free(Obj);
     free(self);

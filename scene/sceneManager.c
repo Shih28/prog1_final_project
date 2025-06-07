@@ -19,16 +19,16 @@ void create_scene(SceneType type)
         scene = New_gamescene(GameScene_L);
         break;
     case quest_menu_phys_L:
-        scene = New_quest_menu(quest_menu_phys_L, al_load_bitmap("assets/image/quest_menu.jpg"));
+        scene = New_quest_menu(quest_menu_phys_L, quest_gameScene_phys_L, al_load_bitmap("assets/image/phys_menu.png"));
         break;
     case quest_menu_2_L:
-        scene = New_quest_menu(quest_menu_2_L,  al_load_bitmap("assets/image/quest_menu.jpg"));
+        scene = New_quest_menu(quest_menu_2_L, quest_gameScene_2_L, al_load_bitmap("assets/image/quest_menu.jpg"));
         break;
     case quest_menu_3_L:
-        scene = New_quest_menu(quest_menu_3_L,  al_load_bitmap("assets/image/quest_menu.jpg"));
+        scene = New_quest_menu(quest_menu_3_L, quest_gameScene_3_L,al_load_bitmap("assets/image/quest_menu.jpg"));
         break;
     case quest_menu_lake_L:
-        scene = New_quest_menu(quest_menu_lake_L,  al_load_bitmap("assets/image/quest_menu.jpg"));
+        scene = New_quest_menu(quest_menu_lake_L, quest_gameScene_lake_L,al_load_bitmap("assets/image/lake_menu.png"));
         break;
     case quest_gameScene_phys_L:
         scene = New_questGamePhys(quest_gameScene_phys_L);

@@ -10,6 +10,8 @@ typedef struct _couple
     int x, y;          // the position of image
     int width, height; // the width and height of image
     int status;             // status
+    int delay_count; //fps
+    int appear_time_count;//fps
     int type;               //which photo
     ALLEGRO_BITMAP *img;
     Shape *hitbox; // the hitbox of object

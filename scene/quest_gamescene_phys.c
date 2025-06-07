@@ -19,7 +19,7 @@ Scene *New_questGamePhys(int label)
     questGamePhys *pDerivedObj = (questGamePhys *)malloc(sizeof(questGamePhys));
     Scene *pObj = New_Scene(label);
     // setting derived object member
-    pDerivedObj->background = al_load_bitmap("assets/image/stage.jpg");
+    pDerivedObj->background = al_load_bitmap("assets/image/phys_bg.png");
     pObj->pDerivedObj = pDerivedObj;
 
     //initialize score
@@ -94,22 +94,20 @@ void questGamePhys_draw(Scene *self)
         Elements *ele = allEle.arr[i];
         ele->Draw(ele);
     }
-    char buf[10];
-    snprintf(buf, 10, "SCORE: %d", score_of_phys_quest);
+    char buf[15], c[15];
     ALLEGRO_FONT *font = al_load_ttf_font("assets/font/pirulen.ttf", 50, 0);
-    al_draw_text(font, al_map_rgb(255, 255, 255), WIDTH-50, 50, ALLEGRO_ALIGN_RIGHT, buf);
-     double cur_time = al_get_timer_count(phys_gamescene_timer);
-    char c[10];
-    if(cur_time<=180){
-        sprintf(c, "%d", (int)(cur_time/60)+1);
-        ALLEGRO_FONT *ready = al_load_ttf_font("assets/font/pirulen.ttf", 100, 0);
+    ALLEGRO_FONT *ready = al_load_ttf_font("assets/font/pirulen.ttf", 100, 0);
+    double cur_time = al_get_timer_count(phys_gamescene_timer);
+
+    if(cur_time<180){
+        sprintf(c, "%d", 3-(int)(cur_time/60));
         al_draw_text(ready, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2, ALLEGRO_ALIGN_CENTRE, c);
-        
     }else{
         int time_left = 32-(int)(cur_time/60);
         sprintf(c, "TIME: %d", time_left);
-        ALLEGRO_FONT *ready = al_load_ttf_font("assets/font/pirulen.ttf", 50, 0);
-        al_draw_text(ready, al_map_rgb(255,255,255), 10, 10, ALLEGRO_ALIGN_LEFT, c);
+        al_draw_text(font, al_map_rgb(255,255,255), 10, 10, ALLEGRO_ALIGN_LEFT, c);
+        sprintf(buf, "SCORE: %d", score_of_phys_quest);
+        al_draw_text(font, al_map_rgb(255, 255, 255), WIDTH-50, 50, ALLEGRO_ALIGN_RIGHT, buf);
     }
 
 }

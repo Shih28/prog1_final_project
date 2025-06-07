@@ -1,4 +1,6 @@
 #include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include "../element/couple.h"
 #include "quest_gamescene_lake.h"
 #include "../element/element.h"
@@ -6,6 +8,8 @@
 #include "../element/button.h"
 #include "stdio.h"
 #define MAX_NUM_OF_PIC 35
+int score_of_lake_quest=0;
+
 /*
    [questGameLake function]
 */
@@ -14,7 +18,7 @@ Scene *New_questGameLake(int label)
     questGameLake *pDerivedObj = (questGameLake *)malloc(sizeof(questGameLake));
     Scene *pObj = New_Scene(label);
     // setting derived object member
-    pDerivedObj->background = al_load_bitmap("assets/image/stage.jpg");
+    pDerivedObj->background = al_load_bitmap("assets/image/lake_bg.png");
     pObj->pDerivedObj = pDerivedObj;
     // register element
     _Register_elements(pObj, New_bat(Bat_L));
@@ -56,14 +60,19 @@ void questGameLake_update(Scene *self)
             _Remove_elements(self, ele);
     }
 
+    double current_time = al_get_timer_count(lake_gamescene_timer);
+
+    if(current_time>=180){
     int time_gap = 45+rand()%75; //fps
-    double current_time = al_get_timer_count(couple_timer);
-    if(current_time>=time_gap){
+    double time_count = al_get_timer_count(couple_timer);
+    if(time_count>=time_gap){
         int pos_x = 100 + rand()%(WIDTH-100);
         int pos_y = 50 + (rand()%(HEIGHT-50));
         _Register_elements(self, New_couple(Couple_L, pos_x, pos_y, 0));
         al_set_timer_count(couple_timer, 0);
     }
+    }
+
 }
 void questGamelake_draw(Scene *self)
 {
@@ -76,6 +85,22 @@ void questGamelake_draw(Scene *self)
         Elements *ele = allEle.arr[i];
         ele->Draw(ele);
     }
+    ALLEGRO_FONT *font = al_load_font("assets/font/pirulen.ttf", 50, 0);
+    ALLEGRO_FONT *ready = al_load_font("assets/font/pirulen.ttf", 100, 0);
+    double current_time = al_get_timer_count(lake_gamescene_timer);
+    char buf[15], scor[15];
+    if(current_time<180){
+        int countdown = 3-(int)(current_time/60);
+        sprintf(buf, "%d", countdown);
+        al_draw_text(ready, al_map_rgb(255,255,255), WIDTH/2, HEIGHT/2, ALLEGRO_ALIGN_CENTRE, buf);
+    }else{
+        int game_countdown = 32-(int)(current_time/60);
+        sprintf(buf, "TIME: %d", game_countdown);
+        sprintf(scor, "SCORE: %d", score_of_lake_quest);
+        al_draw_text(font, al_map_rgb(255,255,255), 10, 10, ALLEGRO_ALIGN_LEFT, buf);
+        al_draw_text(font, al_map_rgb(255,255,255), WIDTH-50, 50, ALLEGRO_ALIGN_RIGHT, scor);
+    }
+
 }
 void questGameLake_destroy(Scene *self)
 {

@@ -13,9 +13,10 @@ typedef enum QuestMenuEletype
 typedef struct _quest_1_menu
 {
     ALLEGRO_BITMAP *background;
+    int next_scene;
 
 } quest_menu;
-Scene *New_quest_menu(int label, ALLEGRO_BITMAP *img);
+Scene *New_quest_menu(int label, int next_scene, ALLEGRO_BITMAP *img);
 void quest_menu_update(Scene *self);
 void quest_menu_draw(Scene *self);
 void quest_menu_destroy(Scene *self);
