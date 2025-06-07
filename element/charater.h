@@ -34,6 +34,6 @@ void Character_interact(Elements *self);
 void Character_draw(Elements *self);
 void Character_destory(Elements *self);
 void _Character_update_position(Elements *self, int dx, int dy);
-void character_interact_questNode(Elements *self, Elements *tar, int type);
+void character_interact_questNode(Elements *self, Elements *tar);
 
 #endif

@@ -1,11 +1,7 @@
 #include <allegro5/allegro_audio.h>
 #include "quest_gamescene_lake.h"
 #include "../element/element.h"
-#include "../element/charater.h"
-#include "../element/floor.h"
-#include "../element/teleport.h"
-#include "../element/questNode.h"
-#include "../element/projectile.h"
+#include "../element/bat.h"
 #include "../element/button.h"
 /*
    [questGameLake function]
@@ -18,7 +14,7 @@ Scene *New_questGameLake(int label)
     pDerivedObj->background = al_load_bitmap("assets/image/stage.jpg");
     pObj->pDerivedObj = pDerivedObj;
     // register element
-
+    _Register_elements(pObj, New_bat(Bat_L));
     
 
     // setting derived object function

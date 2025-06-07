@@ -1,5 +1,5 @@
-#ifndef questGame4_H_INCLUDED
-#define questGame4_H_INCLUDED
+#ifndef questGameLake_H_INCLUDED
+#define questGameLake_H_INCLUDED
 #include "scene.h"
 
 /*
@@ -7,7 +7,8 @@
 */
 typedef enum QuestGameLakeEle
 {
-    d4
+    Couple_L,
+    Bat_L
 } QuestGameLakeEle;
 
 typedef struct _questGame4

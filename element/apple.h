@@ -22,6 +22,5 @@ void apple_draw(Elements *self);
 void apple_destory(Elements *self);
 void _apple_update_position(Elements *self, int dx, int dy);
 void _apple_interact_Floor(Elements *self);
-void _apple_interact_Newton(Elements *self, Elements *tar);
 
 #endif

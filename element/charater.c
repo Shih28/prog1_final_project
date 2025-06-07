@@ -193,14 +193,14 @@ void _Character_update_position(Elements *self, int dx, int dy)
     hitbox->update_center_y(hitbox, dy);
 }
 
-void character_interact_questNode(Elements *self, Elements *tar, int type){
+void character_interact_questNode(Elements *self, Elements *tar){
     Character *chra = ((Character*)self->pDerivedObj);
     questNode *qn = ((questNode*)tar->pDerivedObj);
 
     if(chra->hitbox->overlap(chra->hitbox, qn->hitbox)){
         printf("HIT");
         scene->scene_end=true;
-        window=type;
+        window=qn->change_scene;
     }
 }
 
@@ -211,16 +211,16 @@ void Character_interact(Elements *self) {
         ElementVec labelEle = _Get_label_elements(scene, inter_label);
         for(int j=0; j<labelEle.len; j++){
             if(inter_label==questNode_L){
-                character_interact_questNode(self, labelEle.arr[j], inter_label);
+                character_interact_questNode(self, labelEle.arr[j]);
             }
             else if(inter_label==questNode2_L){
-                character_interact_questNode(self, labelEle.arr[j], inter_label);
+                character_interact_questNode(self, labelEle.arr[j]);
             }
             else if(inter_label==questNode3_L){
-                character_interact_questNode(self, labelEle.arr[j], inter_label);
+                character_interact_questNode(self, labelEle.arr[j]);
             }
             else if(inter_label==questNode4_L){
-                character_interact_questNode(self, labelEle.arr[j], inter_label);
+                character_interact_questNode(self, labelEle.arr[j]);
             }
             
         }

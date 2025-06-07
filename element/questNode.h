@@ -1,12 +1,12 @@
-#ifndef TREE_H_INCLUDED
-#define TREE_H_INCLUDED
+#ifndef questNode_H_INCLUDED
+#define questNode_H_INCLUDED
 #include "element.h"
 #include "../scene/gamescene.h" // for element label
 #include "../shapes/Shape.h"
 /*
-   [tree object]
+   [questNode object]
 */
-typedef struct _Tree
+typedef struct _questNode
 {
     int x, y;          // the position of image
     int width, height; // the width and height of image

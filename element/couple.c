@@ -1,0 +1,90 @@
+#include "couple.h"
+#include "bat.h"
+#include "../shapes/Circle.h"
+#include "../scene/quest_gamescene_lake.h" // for element label
+#include "../scene/sceneManager.h" // for scene variable
+#define MAX_NUM_OF_PIC 35
+/*
+   [couple function]
+*/
+
+char pic[MAX_NUM_OF_PIC][2][50] = { //which photo, status, lenth of directory
+    {"assets/image/projectile.png", "assets/image/tree.png"},
+};
+
+Elements *New_couple(int label, int x, int y, int type)
+{
+    couple *pDerivedObj = (couple *)malloc(sizeof(couple));
+    Elements *pObj = New_Elements(label);
+    // setting derived object member
+    pDerivedObj->img = al_load_bitmap(pic[type][0]);
+    pDerivedObj->width = al_get_bitmap_width(pDerivedObj->img);
+    pDerivedObj->height = al_get_bitmap_height(pDerivedObj->img);
+    pDerivedObj->x = x;
+    pDerivedObj->y = y;
+    pDerivedObj->type = type;
+    pDerivedObj->status = 0;//haven't been hit
+    pDerivedObj->type = label;
+    pDerivedObj->hitbox = New_Circle(pDerivedObj->x + pDerivedObj->width / 2,
+                                     pDerivedObj->y + pDerivedObj->height / 2,
+                                     min(pDerivedObj->width, pDerivedObj->height) / 2);
+    // setting the interact object
+    pObj->inter_obj[pObj->inter_len++]=Bat_L;
+   
+    // setting derived object function
+    pObj->pDerivedObj = pDerivedObj;
+    pObj->Update = couple_update;
+    pObj->Interact = couple_interact;
+    pObj->Draw = couple_draw;
+    pObj->Destroy = couple_destory;
+
+    return pObj;
+}
+void couple_update(Elements *self)
+{
+    couple *Obj = ((couple *)(self->pDerivedObj));
+    
+}
+
+void couple_interact_bat(Elements* self, Elements *tar){
+    bat *Bat = (bat*)tar->pDerivedObj;
+    couple *coup = (couple*)self->pDerivedObj;
+
+    if(coup->hitbox->overlap(Bat->hitbox, Bat->hitbox)){
+        coup->status=1;
+        coup->img = al_load_bitmap(pic[coup->type][coup->status]);
+        al_rest(0.5);
+        self->dele=true;
+    }
+}   
+
+void couple_interact(Elements *self)
+{
+    for (int j = 0; j < self->inter_len; j++)
+    {
+        int inter_label = self->inter_obj[j];
+        ElementVec labelEle = _Get_label_elements(scene, inter_label);
+        
+        for (int i = 0; i < labelEle.len; i++)
+        {
+            if(inter_label==Bat_L){
+                couple_interact_bat(self, labelEle.arr[i]);
+            }
+        }
+    }
+}
+
+void couple_draw(Elements *self)
+{
+    couple *Obj = ((couple *)(self->pDerivedObj));
+    al_draw_bitmap(Obj->img, Obj->x, Obj->y, 0);
+   
+}
+void couple_destory(Elements *self)
+{
+    couple *Obj = ((couple *)(self->pDerivedObj));
+    al_destroy_bitmap(Obj->img);
+    free(Obj->hitbox);
+    free(Obj);
+    free(self);
+}

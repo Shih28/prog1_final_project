@@ -56,14 +56,6 @@ void apple_interact(Elements *self)
         
         for (int i = 0; i < labelEle.len; i++)
         {
-            if (inter_label == AppleRight_L)
-            {
-                _apple_interact_Newton(self, labelEle.arr[i]);
-            }
-            else if (inter_label == AppleWrong_L)
-            {
-                _apple_interact_Newton(self, labelEle.arr[i]);
-            }
         }
     }
 }
@@ -75,15 +67,7 @@ void _apple_interact_Floor(Elements *self)
         printf("apple deleted\n");
     }
 }
-void _apple_interact_Newton(Elements *self, Elements *tar)
-{
-    apple *Obj = ((apple *)(self->pDerivedObj));
-    questNode *tree = ((questNode *)(tar->pDerivedObj));
-    if (tree->hitbox->overlap(tree->hitbox, Obj->hitbox))
-    {
-        self->dele = true;
-    }
-}
+
 void apple_draw(Elements *self)
 {
     apple *Obj = ((apple *)(self->pDerivedObj));

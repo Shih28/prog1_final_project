@@ -19,7 +19,7 @@ Scene *New_quest_menu(int label, ALLEGRO_BITMAP *img)
     // setting derived object member
     switch(label){
         case quest_menu_phys_L:
-            _Register_elements(pObj, New_button(StartButton_L, 180,250, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_phys_L));
+            _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_phys_L));
             break;
         case quest_menu_2_L:
             _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_2_L));
