@@ -1,4 +1,6 @@
 #include "questNode.h"
+#include "../global.h"
+#include "../scene/sceneManager.h"
 #include "../shapes/Rectangle.h"
 /*
    [tree function]

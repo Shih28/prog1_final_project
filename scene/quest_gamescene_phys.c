@@ -66,7 +66,7 @@ void questGamePhys_update(Scene *self)
     if(key_state[ALLEGRO_KEY_P]){
         self->scene_end=true;
         window=Phys_endscene_L;
-        QuestComp[QuestPhys_L]=1;
+        
     }else if (key_state[ALLEGRO_KEY_B]){
         self->scene_end=true;
         window=GameScene_L;

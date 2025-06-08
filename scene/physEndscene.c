@@ -45,6 +45,7 @@ void physEndscene_update(Scene *self)
     if (key_state[ALLEGRO_KEY_ENTER])
     {
         self->scene_end = true;
+        QuestComp[QuestPhys_L]=1;
         window = GameScene_L;
     }
     return;

@@ -77,6 +77,10 @@ void execute(Game *self)
         default:
             break;
         }
+
+        if(QuestComp[0] && QuestComp[1] && QuestComp[2] && QuestComp[3]){
+            ALL_COMPLETE=true;
+        }
     }
 }
 void game_init(Game *self)
@@ -126,6 +130,12 @@ void game_init(Game *self)
 bool game_update(Game *self)
 {
     scene->Update(scene);
+    
+    if(ALL_COMPLETE==true){
+        scene->scene_end=true;
+        window=Final_endscene_L;
+    }
+
     if (scene->scene_end)
     {
         scene->Destroy(scene);
@@ -167,7 +177,9 @@ bool game_update(Game *self)
         case Phys_endscene_L:
             create_scene(Phys_endscene_L);
             break;
-        
+        case Final_endscene_L:
+            create_scene(Final_endscene_L);
+            break;
         
         case -1:
             return false;
@@ -175,6 +187,8 @@ bool game_update(Game *self)
             break;
         }
     }
+
+
     return true;
 }
 void game_draw(Game *self)

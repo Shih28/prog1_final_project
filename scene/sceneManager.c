@@ -8,6 +8,7 @@
 #include "lakeEndscene.h"
 #include "physEndscene.h"
 #include "quest_menu.h"
+#include "finalEndscene.h"
 
 Scene *scene = NULL;
 void create_scene(SceneType type)
@@ -50,7 +51,10 @@ void create_scene(SceneType type)
     case Phys_endscene_L:
         scene = New_physEndscene(Phys_endscene_L);
         break;
-
+    case Final_endscene_L:
+        scene = New_finalEndscene(Final_endscene_L);
+        break;
+    
     default:
         break;
     }

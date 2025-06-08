@@ -1,4 +1,5 @@
 #include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include "gamescene.h"
 #include "../element/element.h"
 #include "../element/charater.h"
@@ -69,6 +70,20 @@ void gamescene_draw(Scene *self)
         Elements *ele = allEle.arr[i];
         ele->Draw(ele);
     }
+
+    // if(QuestComp[QuestPhys_L]){
+    //     al_draw_bitmap(al_load_bitmap("assets/image/crown.png"), 1405,110,0);
+    // }
+    // if(QuestComp[QuestLake_L]){
+    //     al_draw_bitmap(al_load_bitmap("assets/image/crown.png"), 190,490,0);
+    // }
+    // if(QuestComp[QuestMath_L]){
+    //     al_draw_bitmap(al_load_bitmap("assets/image/crown.png"), 652,260,0);
+    // }
+    // if(QuestComp[QuestLifeSci_L]){
+    //     al_draw_bitmap(al_load_bitmap("assets/image/crown.png"), 475,70,0);
+    // }
+    
 }
 void gamescene_destroy(Scene *self)
 {

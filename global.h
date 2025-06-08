@@ -34,7 +34,7 @@ typedef enum QuestComplete{
     QuestLifeSci_L
 }QuestComplete;
 extern int QuestComp[4];
-
+extern bool ALL_COMPLETE;
 extern bool debug_mode;
 
 #endif

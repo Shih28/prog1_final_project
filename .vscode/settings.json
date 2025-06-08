@@ -11,6 +11,7 @@
 		"limits": "c",
 		"ratio": "c",
 		"variant": "c",
-		"quest_gamescene_phys.h": "c"
+		"quest_gamescene_phys.h": "c",
+		"algif.h": "c"
 	}
 }

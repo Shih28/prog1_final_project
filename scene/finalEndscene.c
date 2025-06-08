@@ -3,22 +3,26 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-#include "lakeEndscene.h"
-#include "quest_gamescene_lake.h"
+#include "finalEndscene.h"
+#include "quest_gamescene_phys.h"
 #include "sceneManager.h"
 #include <stdbool.h>
 /*
-   [lakeEndscene function]
+   [finalEndscene function]
 */
-Scene *New_lakeEndscene(int label)
+Scene *New_finalEndscene(int label)
 {
-    lakeEndscene *pDerivedObj = (lakeEndscene*)malloc(sizeof(lakeEndscene));
+    finalEndscene *pDerivedObj = (finalEndscene*)malloc(sizeof(finalEndscene));
     Scene *pObj = New_Scene(label);
-    pDerivedObj->img=al_load_bitmap("assets/image/lake_end.png");
     // setting derived object member
     pDerivedObj->font = al_load_ttf_font("assets/font/pirulen.ttf", 95, 0);
+
+    pDerivedObj->img = al_load_bitmap("assets/image/phys.png");
+
+    sprintf(pDerivedObj->score, "%d", score_of_phys_quest);
+
     // Load sound
-    pDerivedObj->song = al_load_sample("assets/sound/lakeEndscene.mp3");
+    pDerivedObj->song = al_load_sample("assets/sound/finalEndscene.mp3");
     al_reserve_samples(20);
     pDerivedObj->sample_instance = al_create_sample_instance(pDerivedObj->song);
     pDerivedObj->title_x = WIDTH / 2;
@@ -30,38 +34,31 @@ Scene *New_lakeEndscene(int label)
     // set the volume of instance
     al_set_sample_instance_gain(pDerivedObj->sample_instance, 0.1);
     pObj->pDerivedObj = pDerivedObj;
-
-    //set score
-    sprintf(pDerivedObj->score, "%d", score_of_lake_quest);
-
     // setting derived object function
-    pObj->Update = lakeEndscene_update;
-    pObj->Draw = lakeEndscene_draw;
-    pObj->Destroy = lakeEndscene_destroy;
+    pObj->Update = finalEndscene_update;
+    pObj->Draw = finalEndscene_draw;
+    pObj->Destroy = finalEndscene_destroy;
     return pObj;
 }
-void lakeEndscene_update(Scene *self)
+void finalEndscene_update(Scene *self)
 {
     if (key_state[ALLEGRO_KEY_ENTER])
     {
         self->scene_end = true;
-        QuestComp[QuestLake_L]=1;
         window = GameScene_L;
     }
     return;
 }
-void lakeEndscene_draw(Scene *self)
+void finalEndscene_draw(Scene *self)
 {
-    lakeEndscene *Obj = ((lakeEndscene *)(self->pDerivedObj));
-    al_draw_bitmap(Obj->img,0,0,0);
-    al_draw_text(Obj->font, al_map_rgb(0,0,0), 1365 ,528, ALLEGRO_ALIGN_CENTRE, Obj->score);
-    
+    finalEndscene *Obj = ((finalEndscene *)(self->pDerivedObj));
+    al_draw_bitmap(Obj->img, 0,0,0);
+    al_draw_text(Obj->font, al_map_rgb(0,0,0), 1205, 500, ALLEGRO_ALIGN_CENTRE, Obj->score);
 }
-void lakeEndscene_destroy(Scene *self)
+void finalEndscene_destroy(Scene *self)
 {
-    lakeEndscene *Obj = ((lakeEndscene *)(self->pDerivedObj));
+    finalEndscene *Obj = ((finalEndscene *)(self->pDerivedObj));
     al_destroy_font(Obj->font);
-    al_destroy_sample(Obj->song);
     al_destroy_bitmap(Obj->img);
     free(Obj);
     free(self);
