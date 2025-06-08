@@ -12,6 +12,7 @@
 		"ratio": "c",
 		"variant": "c",
 		"quest_gamescene_phys.h": "c",
-		"algif.h": "c"
+		"algif.h": "c",
+		"allegro_font.h": "c"
 	}
 }

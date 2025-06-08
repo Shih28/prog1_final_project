@@ -1,6 +1,7 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
 #include "charater.h"
 #include "projectile.h"
 #include "../element/questNode.h"
@@ -150,6 +151,7 @@ void Character_draw(Elements *self)
     {
         al_play_sample_instance(chara->atk_Sound);
     }
+    // al_draw_rectangle(chara->x, chara->y, chara->x+chara->width, chara->y+chara->height, al_map_rgb(255,255,255), 1);
 }
 void Character_destory(Elements *self)
 {
