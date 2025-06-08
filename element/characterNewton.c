@@ -85,13 +85,13 @@ void CharacterNewton_update(Elements *self)
         if (key_state[ALLEGRO_KEY_A])
         {
             chara->dir = false;
-            CharacterNewton_update_position(self, -5, 0);
+            CharacterNewton_update_position(self, -7, 0);
             chara->state = MOVE;
         }
         else if (key_state[ALLEGRO_KEY_D])
         {
             chara->dir = true;
-            CharacterNewton_update_position(self, 5, 0);
+            CharacterNewton_update_position(self, 7, 0);
             chara->state = MOVE;
         }
         // if (chara->gif_status[chara->state]->done)

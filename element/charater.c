@@ -107,23 +107,23 @@ void Character_update(Elements *self)
         else if (key_state[ALLEGRO_KEY_A])
         {
             chara->dir = false;
-            _Character_update_position(self, -5, 0);
+            _Character_update_position(self, -7, 0);
             chara->state = MOVE;
         }
         else if (key_state[ALLEGRO_KEY_W])
         {
-            _Character_update_position(self, 0, -5);
+            _Character_update_position(self, 0, -7);
             chara->state = MOVE;
         }
         else if (key_state[ALLEGRO_KEY_S])
         {
-            _Character_update_position(self, 0, 5);
+            _Character_update_position(self, 0, 7);
             chara->state = MOVE;
         }
         else if (key_state[ALLEGRO_KEY_D])
         {
             chara->dir = true;
-            _Character_update_position(self, 5, 0);
+            _Character_update_position(self, 7, 0);
             chara->state = MOVE;
         }
         // if (chara->gif_status[chara->state]->done)

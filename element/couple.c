@@ -71,7 +71,7 @@ void couple_update(Elements *self)
     }
     if(Obj->status==1) Obj->delay_count++;
     if(Obj->delay_count>=30) self->dele=true;
-    if(Obj->appear_time_count>=100) self->dele=true;
+    if(Obj->appear_time_count>=80) self->dele=true;
 }
 
 
