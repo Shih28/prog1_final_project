@@ -24,7 +24,7 @@ Scene *New_quest_menu(int label, int next_secene, ALLEGRO_BITMAP *img)
     //         _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_phys_L));
     //         break;
     //     case quest_menu_2_L:
-    //         _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_2_L));
+    //         _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), Math_gamescene_L));
     //         break;
     //     case quest_menu_3_L:
     //         _Register_elements(pObj, New_button(StartButton_L, 100,50, al_load_bitmap("assets/image/start_button.png"), quest_gameScene_3_L));

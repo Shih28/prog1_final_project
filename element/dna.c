@@ -101,12 +101,12 @@ void dna_interact(Elements *self)
 
         if (check_match(obj, current_keycode)) {
             // 配對成功
-            // target_dna->dele = true;
+            target_dna->dele = true;
             score += 2;
             current_keycode = -1;
         } else {
             // 配對錯誤
-            //target_dna->dele = true;
+            target_dna->dele = true;
             score -= 1;
             current_keycode = -1;
         }

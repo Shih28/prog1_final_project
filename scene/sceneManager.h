@@ -11,12 +11,13 @@ typedef enum SceneType
     quest_menu_3_L,
     quest_menu_lake_L,
     quest_gameScene_phys_L,
-    quest_gameScene_2_L,
+    Math_gamescene_L,
     quest_gameScene_3_L,
     quest_gameScene_lake_L,
     Lake_endscene_L,
     Phys_endscene_L,
-    Final_endscene_L
+    Final_endscene_L,
+    game2_endscene_L
     
 } SceneType;
 void create_scene(SceneType);

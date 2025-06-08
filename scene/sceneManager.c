@@ -2,7 +2,7 @@
 #include "menu.h"
 #include "gamescene.h"
 #include "quest_gamescene_phys.h"
-#include "quest_gamescene_2.h"
+#include "quest_gamescene_math.h"
 #include "quest_gamescene_3.h"
 #include "quest_gamescene_lake.h"
 #include "lakeEndscene.h"
@@ -25,7 +25,7 @@ void create_scene(SceneType type)
         scene = New_quest_menu(quest_menu_phys_L, quest_gameScene_phys_L, al_load_bitmap("assets/image/phys_intro.png"));
         break;
     case quest_menu_2_L:
-        scene = New_quest_menu(quest_menu_2_L, quest_gameScene_2_L, al_load_bitmap("assets/image/quest_menu.jpg"));
+        scene = New_quest_menu(quest_menu_2_L, Math_gamescene_L, al_load_bitmap("assets/image/quest_menu.jpg"));
         break;
     case quest_menu_3_L:
         scene = New_quest_menu(quest_menu_3_L, quest_gameScene_3_L,al_load_bitmap("assets/image/quest_menu.jpg"));
@@ -36,8 +36,8 @@ void create_scene(SceneType type)
     case quest_gameScene_phys_L:
         scene = New_questGamePhys(quest_gameScene_phys_L);
         break;
-    case quest_gameScene_2_L:
-        scene = New_questGame2(quest_gameScene_2_L);
+    case Math_gamescene_L:
+        scene = New_questGameMath(Math_gamescene_L);
         break;
     case quest_gameScene_3_L:
         scene = New_questGame3(quest_gameScene_3_L);

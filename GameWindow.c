@@ -163,8 +163,8 @@ bool game_update(Game *self)
         case quest_gameScene_phys_L:
             create_scene(quest_gameScene_phys_L);
             break;
-        case quest_gameScene_2_L:
-            create_scene(quest_gameScene_2_L);
+        case Math_gamescene_L:
+            create_scene(Math_gamescene_L);
             break;
         case quest_gameScene_3_L:
             create_scene(quest_gameScene_3_L);
