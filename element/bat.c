@@ -10,8 +10,8 @@
 */
 
 char bat_pic[2][50]={
-    {"assets/image/node.png"},
-    {"assets/image/projectile.png"}
+    {"assets/image/pie_1.png"},
+    {"assets/image/pie_2.png"}
 };
 
 Elements *New_bat(int label)
