@@ -13,6 +13,7 @@ ALLEGRO_TIMER *apple_timer = NULL;
 ALLEGRO_TIMER *couple_timer = NULL;
 ALLEGRO_TIMER *phys_gamescene_timer = NULL;
 ALLEGRO_TIMER *lake_gamescene_timer = NULL;
+int QuestComp[4]={0};
 
 bool key_state[ALLEGRO_KEY_MAX] = {false};
 bool mouse_state[ALLEGRO_MOUSE_MAX_EXTRA_AXES] = {false};

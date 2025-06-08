@@ -4,8 +4,10 @@
 #include "quest_gamescene_phys.h"
 #include "../element/element.h"
 #include "../element/characterNewton.h"
+#include "sceneManager.h"
 #include "../element/apple.h"
 #include "../element/button.h"
+#include "../global.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -45,19 +47,26 @@ void questGamePhys_update(Scene *self)
 {
     double c_time = al_get_timer_count(phys_gamescene_timer);
     // printf("phys_timer: %lf\n", c_time);
-   if(c_time>180){
+   if(c_time>=180){
         //add apple 
         double apple_time = al_get_timer_count(apple_timer);
         bool add = (60-apple_time)<=0; //time count:FPS
-        // printf("apple_timer: %lf", apple_time);
         if(add){
             addApple(self);
             al_set_timer_count(apple_timer, 0);
         }
     }
-    
 
-    
+    if(c_time>=33*FPS){
+        al_rest(1);
+        self->scene_end=true;
+        window=Phys_endscene_L;
+    }
+
+    if(key_state[ALLEGRO_KEY_P]){
+        self->scene_end=true;
+        window=Phys_endscene_L;
+    }
     
 
     // update every element
@@ -133,5 +142,6 @@ void addApple(Scene* self){
     int type_of_apple = rand()%2;
     int pos_x = 150+rand()%(WIDTH-150);
     int pos_y = -100;
-    _Register_elements(self, New_apple(type_of_apple, pos_x, pos_y, 3));
+    int pic_of_apple = rand()%10;
+    _Register_elements(self, New_apple(type_of_apple, pos_x, pos_y, 3, pic_of_apple));
 }

@@ -3,15 +3,30 @@
 #include "../shapes/Circle.h"
 #include "../scene/quest_gamescene_phys.h" // for element label
 #include "../scene/sceneManager.h" // for scene variable
+#define MAX_NUM_OF_APPLE 10
 /*
    [apple function]
 */
-Elements *New_apple(int label, int x, int y, int v)
+
+char pic_apple[MAX_NUM_OF_APPLE][2][50]={
+    {"assets/image/rightApple_1.png", "assets/image/wrongApple_1.png"},
+    {"assets/image/rightApple_2.png", "assets/image/wrongApple_2.png"},
+    {"assets/image/rightApple_3.png", "assets/image/wrongApple_3.png"},
+    {"assets/image/rightApple_4.png", "assets/image/wrongApple_4.png"},
+    {"assets/image/rightApple_5.png", "assets/image/wrongApple_5.png"},
+    {"assets/image/rightApple_6.png", "assets/image/wrongApple_6.png"},
+    {"assets/image/rightApple_7.png", "assets/image/wrongApple_7.png"},
+    {"assets/image/rightApple_8.png", "assets/image/wrongApple_8.png"},
+    {"assets/image/rightApple_9.png", "assets/image/wrongApple_9.png"},
+    {"assets/image/rightApple_10.png", "assets/image/wrongApple_10.png"}
+};
+
+Elements *New_apple(int label, int x, int y, int v, int type)
 {
     apple *pDerivedObj = (apple *)malloc(sizeof(apple));
     Elements *pObj = New_Elements(label);
     // setting derived object member
-    pDerivedObj->img = al_load_bitmap("assets/image/projectile.png");
+    pDerivedObj->img = al_load_bitmap(pic_apple[type][label]);
     pDerivedObj->width = al_get_bitmap_width(pDerivedObj->img);
     pDerivedObj->height = al_get_bitmap_height(pDerivedObj->img);
     pDerivedObj->x = x;
@@ -71,10 +86,7 @@ void _apple_interact_Floor(Elements *self)
 void apple_draw(Elements *self)
 {
     apple *Obj = ((apple *)(self->pDerivedObj));
-    if (Obj->v > 0)
-        al_draw_bitmap(Obj->img, Obj->x, Obj->y, ALLEGRO_FLIP_HORIZONTAL);
-    else
-        al_draw_bitmap(Obj->img, Obj->x, Obj->y, 0);
+    al_draw_bitmap(Obj->img, Obj->x, Obj->y, 0);
 }
 void apple_destory(Elements *self)
 {

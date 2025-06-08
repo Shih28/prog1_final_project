@@ -94,8 +94,12 @@ void CharacterNewton_update(Elements *self)
             CharacterNewton_update_position(self, 5, 0);
             chara->state = MOVE;
         }
-        if (chara->gif_status[chara->state]->done)
-            chara->state = STOP;
+        // if (chara->gif_status[chara->state]->done)
+        //     chara->state = STOP;
+        if(key_state[ALLEGRO_KEY_A]==0 && 
+           key_state[ALLEGRO_KEY_D]==0){
+            chara->state=STOP;
+        }
     }
 }
 

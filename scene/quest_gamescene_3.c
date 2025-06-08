@@ -7,6 +7,7 @@
 #include "../element/questNode.h"
 #include "../element/projectile.h"
 #include "../element/button.h"
+#include "../global.h"
 /*
    [questGame3 function]
 */

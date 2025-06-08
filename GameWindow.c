@@ -161,6 +161,13 @@ bool game_update(Game *self)
         case quest_gameScene_lake_L:
             create_scene(quest_gameScene_lake_L);
             break;
+        case Lake_endscene_L:
+            create_scene(Lake_endscene_L);
+            break;
+        case Phys_endscene_L:
+            create_scene(Phys_endscene_L);
+            break;
+        
         
         case -1:
             return false;

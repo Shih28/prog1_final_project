@@ -15,7 +15,7 @@ typedef struct _apple
     Shape *hitbox; // the hitbox of object
 } apple;
 
-Elements *New_apple(int label, int x, int y, int v);
+Elements *New_apple(int label, int x, int y, int v, int type);
 void apple_update(Elements *self);
 void apple_interact(Elements *self);
 void apple_draw(Elements *self);

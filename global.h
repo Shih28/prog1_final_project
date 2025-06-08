@@ -27,6 +27,13 @@ extern ALLEGRO_TIMER *apple_timer;
 extern ALLEGRO_TIMER *phys_gamescene_timer;
 extern ALLEGRO_TIMER *lake_gamescene_timer;
 extern ALLEGRO_TIMER *couple_timer;
+typedef enum QuestComplete{
+    QuestLake_L,
+    QuestPhys_L,
+    QuestMath_L,
+    QuestLifeSci_L
+}QuestComplete;
+extern int QuestComp[4];
 
 extern bool debug_mode;
 

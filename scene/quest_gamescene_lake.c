@@ -6,9 +6,12 @@
 #include "../element/element.h"
 #include "../element/bat.h"
 #include "../element/button.h"
+#include "sceneManager.h"
+#include "../global.h"
 #include "stdio.h"
-#define MAX_NUM_OF_PIC 35
 int score_of_lake_quest=0;
+
+
 
 /*
    [questGameLake function]
@@ -28,6 +31,9 @@ Scene *New_questGameLake(int label)
     al_set_timer_count(couple_timer, 0);
     al_start_timer(lake_gamescene_timer);
     al_start_timer(couple_timer);
+
+    //initialize score
+    score_of_lake_quest=0;
 
     // setting derived object function
     pObj->Update = questGameLake_update;
@@ -65,12 +71,25 @@ void questGameLake_update(Scene *self)
     if(current_time>=180){
     int time_gap = 45+rand()%75; //fps
     double time_count = al_get_timer_count(couple_timer);
-    if(time_count>=time_gap){
-        int pos_x = 100 + rand()%(WIDTH-100);
-        int pos_y = 50 + (rand()%(HEIGHT-50));
-        _Register_elements(self, New_couple(Couple_L, pos_x, pos_y, 0));
+    if(time_count>time_gap){
+        int type = (rand()%15);
+        int pos_x = 200 + rand()%(WIDTH-200);
+        int pos_y = 100 + (rand()%(HEIGHT-100));
+        _Register_elements(self, New_couple(Couple_L, pos_x, pos_y, type));
         al_set_timer_count(couple_timer, 0);
+        // printf("type: %d, dir: %s\n", type, picC[type]);
     }
+    }
+
+    if(current_time>=33*60){
+        al_rest(1);
+        self->scene_end=true;
+        window=Lake_endscene_L;
+    }
+
+    if(key_state[ALLEGRO_KEY_P]){
+        self->scene_end=true;
+        window=Lake_endscene_L;
     }
 
 }
