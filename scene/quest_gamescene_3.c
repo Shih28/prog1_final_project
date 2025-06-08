@@ -98,7 +98,7 @@ void questGame3_update(Scene *self)
     double current_time = al_get_timer_count(lifeSci_gamescene_timer);
     if(current_time>=FPS*30)
     {
-        self->scene_end=true;
+        self->scene_end=true;//
         window=GameScene_L;
     }
     
