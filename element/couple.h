@@ -22,6 +22,5 @@ void couple_update(Elements *self);
 void couple_interact(Elements *self);
 void couple_draw(Elements *self);
 void couple_destory(Elements *self);
-void couple_interact_bat(Elements *self, Elements *tar);
 
 #endif

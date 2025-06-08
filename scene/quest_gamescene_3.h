@@ -1,13 +1,16 @@
 #ifndef questGame3_H_INCLUDED
 #define questGame3_H_INCLUDED
 #include "scene.h"
+extern int score;
+extern int combo;
+extern int current_keycode;
 
 /*
    [game scene object]
 */
 typedef enum QuestGame3Ele
 {
-    d3
+    dna_L
 } QuestGame3Ele;
 
 typedef struct _questGame3
