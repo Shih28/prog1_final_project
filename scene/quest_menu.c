@@ -74,6 +74,8 @@ void quest_menu_update(Scene *self)
     if(key_state[ALLEGRO_KEY_ENTER]){
         self->scene_end=true;
         window = ((quest_menu*)self->pDerivedObj)->next_scene;
+        key_state[ALLEGRO_KEY_ENTER]=0;
+        al_rest(0.1);
     }
 }
 void quest_menu_draw(Scene *self)

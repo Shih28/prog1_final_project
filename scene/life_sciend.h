@@ -11,11 +11,12 @@ typedef struct _life_sciend
 {
     ALLEGRO_FONT *font;
     ALLEGRO_BITMAP *img;
-    //char score[15];
+    // char score[15];
 }life_sciend;
 Scene *New_life_sciend(int label);
 void life_sciend_update(Scene *self);
 void life_sciend_draw(Scene *self);
 void life_sciend_destroy(Scene *self);
+
 
 #endif

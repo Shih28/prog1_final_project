@@ -78,9 +78,6 @@ void execute(Game *self)
             break;
         }
 
-        if(QuestComp[0] && QuestComp[1] && QuestComp[2] && QuestComp[3]){
-            ALL_COMPLETE=true;
-        }
     }
 }
 void game_init(Game *self)
@@ -130,18 +127,18 @@ void game_init(Game *self)
 }
 bool game_update(Game *self)
 {
+
     scene->Update(scene);
     
-    if(ALL_COMPLETE==true){
-        scene->scene_end=true;
-        window=Final_endscene_L;
-    }
 
     if (scene->scene_end)
     {
         scene->Destroy(scene);
         switch (window)
         {
+        case Final_endscene_L:
+            create_scene(Final_endscene_L);
+            break;
         case Menu_L:
             create_scene(Menu_L);
             break;
@@ -178,13 +175,28 @@ bool game_update(Game *self)
         case Phys_endscene_L:
             create_scene(Phys_endscene_L);
             break;
+        case Intro_1_L:
+            create_scene(Intro_1_L);
+            break;
+        case Intro_2_L:
+            create_scene(Intro_2_L);
+            break;
+        case Intro_3_L:
+            create_scene(Intro_3_L);
+            break;
+        case Intro_4_L:
+            create_scene(Intro_4_L);
+            break;
         case LifeSci_endscene_L:
             create_scene(LifeSci_endscene_L);
             break;
-        
-        case Final_endscene_L:
-            create_scene(Final_endscene_L);
+         case outro_1_L:
+            create_scene(outro_1_L);
             break;
+         case outro_2_L:
+            create_scene(outro_2_L);
+            break;
+            
         
         case -1:
             return false;

@@ -27,17 +27,13 @@ Elements *New_CharacterNewton(int label)
         sprintf(buffer, "assets/image/char3_%s.gif", state_string[i]);
         pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
     }
-    // load effective sound
-    ALLEGRO_SAMPLE *sample = al_load_sample("assets/sound/atk_sound.wav");
-    pDerivedObj->atk_Sound = al_create_sample_instance(sample);
-    al_set_sample_instance_playmode(pDerivedObj->atk_Sound, ALLEGRO_PLAYMODE_ONCE);
-    al_attach_sample_instance_to_mixer(pDerivedObj->atk_Sound, al_get_default_mixer());
 
     // initial the geometric information of CharacterNewton
     pDerivedObj->width = pDerivedObj->gif_status[0]->width;
     pDerivedObj->height = pDerivedObj->gif_status[0]->height;
     pDerivedObj->x = 300;
     pDerivedObj->y = HEIGHT - pDerivedObj->height - 60;
+    pDerivedObj->v = 7;
     pDerivedObj->hitbox = New_Rectangle(pDerivedObj->x,
                                         pDerivedObj->y,
                                         pDerivedObj->x + pDerivedObj->width,
@@ -47,7 +43,7 @@ Elements *New_CharacterNewton(int label)
     pDerivedObj->state = STOP;
     pDerivedObj->new_proj = false;
     pObj->pDerivedObj = pDerivedObj;
-
+    
     //setting interact objects
     pObj->inter_obj[pObj->inter_len++] = AppleRight_L;
     pObj->inter_obj[pObj->inter_len++] = AppleWrong_L;
@@ -85,13 +81,13 @@ void CharacterNewton_update(Elements *self)
         if (key_state[ALLEGRO_KEY_A])
         {
             chara->dir = false;
-            CharacterNewton_update_position(self, -7, 0);
+            CharacterNewton_update_position(self, -chara->v, 0);
             chara->state = MOVE;
         }
         else if (key_state[ALLEGRO_KEY_D])
         {
             chara->dir = true;
-            CharacterNewton_update_position(self, 7, 0);
+            CharacterNewton_update_position(self, chara->v, 0);
             chara->state = MOVE;
         }
         // if (chara->gif_status[chara->state]->done)
@@ -100,6 +96,11 @@ void CharacterNewton_update(Elements *self)
            key_state[ALLEGRO_KEY_D]==0){
             chara->state=STOP;
         }
+    }
+    if(key_state[ALLEGRO_KEY_SPACE]){
+        chara->v=10;
+    }else{
+        chara->v=7;
     }
 }
 

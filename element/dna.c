@@ -6,14 +6,32 @@
 /*
    [dna function]
 */
+static int last_base_type = -1;
 Elements *New_dna(int label, int x, int y, int v)
 {
     dna *pDerivedObj = (dna *)malloc(sizeof(dna));
     Elements *pObj = New_Elements(0);
     // 隨機產生 1~4 整數，代表 A, T, C, G
-    int base_type = (rand() % 4);
+    static int current_row = -1;
+    static int current_index = 0;
+    int q[4][40] = {
+    {0,1,2,3,1,2,0,3,1,3,1,2,0,3,1,0,2,3,0,2,1,0,2,1,3,1,2,3,1,0,1,0,2,3,1,2,1,0,1,3},
+    {1,0,1,0,2,1,3,1,2,1,2,3,0,2,0,3,1,2,3,0,2,3,2,1,0,3,2,3,0,2,3,0,2,1,0,3,0,1,2,0},
+    {2,3,2,3,0,1,2,3,0,2,1,2,3,0,2,3,0,2,1,0,1,2,3,1,2,3,2,0,2,3,1,0,2,3,2,0,1,2,0,1},
+    {3,1,2,0,2,1,2,3,2,3,2,0,1,2,1,0,2,3,1,2,0,3,1,2,3,0,2,3,0,2,1,0,1,2,3,0,2,1,0,1}
+    };
+
+    
+    if (current_row == -1) {
+        current_row = rand() % 4;
+    }
+
+    int base_type = q[current_row][current_index];
+    current_index = (current_index + 1) % 40; // 避免超出
+    
     
     char img_path[50];
+
     
     switch(base_type)
     {
@@ -92,8 +110,9 @@ void dna_interact(Elements *self)
         }
     }
     //printf("dna_interact: self label=%d, x=%d, max_x=%d\n", self->label, ((dna*)self->pDerivedObj)->x, max_x);
+    
 
-    if (self != target_dna) return;
+    if (self != target_dna) return;;
 
     // 若有找到
     if (target_dna) {
@@ -101,8 +120,11 @@ void dna_interact(Elements *self)
 
         if (check_match(obj, current_keycode)) {
             // 配對成功
+            score_of_lifeSci++;
             target_dna->dele = true;
-            score += 10;
+            if (self->dele) return;  // 防止刪除的元素還執行互動
+            if (current_keycode == -1) return; // 沒有輸入
+            
             current_keycode = -1;
         } 
 

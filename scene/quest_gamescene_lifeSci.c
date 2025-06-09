@@ -15,8 +15,9 @@
 #include <allegro5/allegro_acodec.h>
 #include <stdbool.h>
 
-int score = 0;
+
 int current_keycode = -1;
+int score_of_lifeSci;
 /*
    [questLifeSci function]
 */
@@ -29,7 +30,7 @@ Scene *New_questLifeSci(int label)
     pDerivedObj->background = al_load_bitmap("assets/image/life_sci_ing.png");
     pObj->pDerivedObj = pDerivedObj;
 
-    score = 0;
+    score_of_lifeSci=0;
     current_keycode = -1;
 
     // 建立最初 DNA 或其他初始元素（例：產生四個初始 DNA）
@@ -102,7 +103,7 @@ void questLifeSci_update(Scene *self)
         window=LifeSci_endscene_L;
     }
 
-     if(key_state[ALLEGRO_KEY_P]){
+    if(key_state[ALLEGRO_KEY_P]){
         self->scene_end=true;
         window=LifeSci_endscene_L;
     }else if (key_state[ALLEGRO_KEY_B]){
@@ -128,7 +129,7 @@ void questLifeSci_draw(Scene *self)
     char buf[15], buf_time[15];
     if(ct <=30*FPS){
         int time = 30 - ((int)ct/60);
-        sprintf(buf, "SCORE: %d", score);
+        sprintf(buf, "SCORE: %d", score_of_lifeSci);
         sprintf(buf_time, "TIME: %d", time);
         al_draw_text(font, al_map_rgb(255,255,255), WIDTH-50, 50, ALLEGRO_ALIGN_RIGHT, buf);
         al_draw_text(font, al_map_rgb(255,255,255), 50, 50, ALLEGRO_ALIGN_LEFT, buf_time);

@@ -1,7 +1,7 @@
 #ifndef questLifeSci_H_INCLUDED
 #define questLifeSci_H_INCLUDED
 #include "scene.h"
-extern int score;
+
 extern int combo;
 extern int current_keycode;
 
@@ -22,5 +22,6 @@ Scene *New_questLifeSci(int label);
 void questLifeSci_update(Scene *self);
 void questLifeSci_draw(Scene *self);
 void questLifeSci_destroy(Scene *self);
+extern int score_of_lifeSci;
 
 #endif

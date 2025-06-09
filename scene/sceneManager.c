@@ -29,11 +29,31 @@ void create_scene(SceneType type)
         scene = New_quest_menu(quest_menu_math_L, Math_gamescene_L, al_load_bitmap("assets/image/quest_menu.jpg"));
         break;
     case quest_menu_lifeSci_L:
-        scene = New_quest_menu(quest_menu_lifeSci_L, quest_gameScene_lifeSci_L,al_load_bitmap("assets/image/quest_menu.jpg"));
+        scene = New_quest_menu(quest_menu_lifeSci_L, quest_gameScene_lifeSci_L,al_load_bitmap("assets/image/life_sci_1.png"));
         break;
     case quest_menu_lake_L:
         scene = New_quest_menu(quest_menu_lake_L, quest_gameScene_lake_L,al_load_bitmap("assets/image/lake_intro.png"));
         break;
+    case Intro_1_L:
+        scene = New_quest_menu(Intro_1_L, Intro_2_L,al_load_bitmap("assets/image/intro_1.png"));
+        break;
+    case Intro_2_L:
+        scene = New_quest_menu(Intro_2_L, Intro_3_L,al_load_bitmap("assets/image/intro_2.png"));
+        break;
+    case Intro_3_L:
+        scene = New_quest_menu(Intro_3_L, Intro_4_L,al_load_bitmap("assets/image/intro_3.png"));
+        break;
+    case Intro_4_L:
+        scene = New_quest_menu(Intro_4_L, GameScene_L,al_load_bitmap("assets/image/intro_4.png"));
+        break;
+    
+    case outro_1_L:
+        scene = New_quest_menu(outro_1_L, outro_2_L,al_load_bitmap("assets/image/end_0.png"));
+        break;
+    case outro_2_L:
+        scene = New_quest_menu(outro_2_L, Final_endscene_L,al_load_bitmap("assets/image/end_1.png"));
+        break;
+    
     case quest_gameScene_phys_L:
         scene = New_questGamePhys(quest_gameScene_phys_L);
         break;

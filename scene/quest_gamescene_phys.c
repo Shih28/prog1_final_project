@@ -56,6 +56,7 @@ void questGamePhys_update(Scene *self)
             al_set_timer_count(apple_timer, 0);
         }
     }
+ 
 
     if(c_time>=33*FPS){
         al_rest(1);

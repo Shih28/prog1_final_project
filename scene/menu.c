@@ -3,6 +3,7 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+#include "sceneManager.h"
 #include "menu.h"
 #include <stdbool.h>
 /*
@@ -38,15 +39,16 @@ void menu_update(Scene *self)
     if (key_state[ALLEGRO_KEY_ENTER])
     {
         self->scene_end = true;
-        window = 1;
+        window = Intro_1_L;
+        key_state[ALLEGRO_KEY_ENTER]=0;
+        al_rest(0.2);
     }
     return;
 }
 void menu_draw(Scene *self)
 {
     Menu *Obj = ((Menu *)(self->pDerivedObj));
-    al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to start");
-    al_draw_rectangle(Obj->title_x - 150, Obj->title_y - 30, Obj->title_x + 150, Obj->title_y + 30, al_map_rgb(255, 255, 255), 0);
+    al_draw_bitmap(al_load_bitmap("assets/image/intro_0.png"), 0,0,0);
     al_play_sample_instance(Obj->sample_instance);
 }
 void menu_destroy(Scene *self)

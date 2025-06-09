@@ -10,6 +10,7 @@
 /*
    [lakeEndscene function]
 */
+
 Scene *New_life_sciend(int label)
 {
     life_sciend *pDerivedObj = (life_sciend*)malloc(sizeof(life_sciend));
@@ -21,7 +22,7 @@ Scene *New_life_sciend(int label)
     pObj->pDerivedObj = pDerivedObj;
 
     //set score
-    //sprintf(pDerivedObj->score, "%d", score_of_lake_quest);
+    // sprintf(pDerivedObj->score, "%d", score_of_lake_quest);
 
     // setting derived object function
     pObj->Update = life_sciend_update;
@@ -35,14 +36,23 @@ void life_sciend_update(Scene *self)
     {
         self->scene_end = true;
         QuestComp[QuestLifeSci_L]=1;
-        window = GameScene_L;
+        key_state[ALLEGRO_KEY_ENTER]=0;
+        for(int i=0; i<4; i++){
+            if(QuestComp[i]==0){
+                window = GameScene_L;
+                break;
+            }
+            if(i==3 && QuestComp[i]) window=outro_1_L;
+        }
     }
 }
 void life_sciend_draw(Scene *self)
 {
     life_sciend *Obj = ((life_sciend *)(self->pDerivedObj));
     al_draw_bitmap(Obj->img,0,0,0);
-    //al_draw_text(Obj->font, al_map_rgb(0,0,0), 1365 ,528, ALLEGRO_ALIGN_CENTRE, Obj->score);
+    char buf[15];
+    sprintf(buf, "%d",score_of_lifeSci);
+    al_draw_text(Obj->font, al_map_rgb(0,0,0), 1150 ,355, ALLEGRO_ALIGN_CENTRE, buf);
     
 }
 void life_sciend_destroy(Scene *self)

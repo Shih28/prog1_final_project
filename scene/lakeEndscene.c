@@ -46,7 +46,14 @@ void lakeEndscene_update(Scene *self)
     {
         self->scene_end = true;
         QuestComp[QuestLake_L]=1;
-        window = GameScene_L;
+        key_state[ALLEGRO_KEY_ENTER]=0;
+        for(int i=0; i<4; i++){
+            if(QuestComp[i]==0){
+                window = GameScene_L;
+                break;
+            }
+            if(i==3 && QuestComp[i]) window=outro_1_L;
+        }
     }
     return;
 }
