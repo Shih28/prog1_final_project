@@ -1,7 +1,7 @@
 #include "dna.h"
 #include "questNode.h"
 #include "../shapes/Circle.h"
-#include "../scene/quest_gamescene_3.h" // for element label
+#include "../scene/quest_gamescene_lifeSci.h" // for element label
 #include "../scene/sceneManager.h" // for scene variable
 /*
    [dna function]
@@ -17,10 +17,10 @@ Elements *New_dna(int label, int x, int y, int v)
     
     switch(base_type)
     {
-        case 0: sprintf(img_path,"assets/image/rightApple_1.png"); break;
-        case 1: sprintf(img_path,"assets/image/rightApple_1.png"); break;
-        case 2: sprintf(img_path,"assets/image/rightApple_1.png"); break;
-        case 3: sprintf(img_path,"assets/image/rightApple_1.png"); break;
+        case 0: sprintf(img_path,"assets/image/dna_a.png"); break;
+        case 1: sprintf(img_path,"assets/image/dna_t.png"); break;
+        case 2: sprintf(img_path,"assets/image/dna_c.png"); break;
+        case 3: sprintf(img_path,"assets/image/dna_g.png"); break;
         printf("Failed to load image: %s\n", img_path);
     }
     // setting derived object member
@@ -102,14 +102,9 @@ void dna_interact(Elements *self)
         if (check_match(obj, current_keycode)) {
             // 配對成功
             target_dna->dele = true;
-            score += 2;
+            score += 10;
             current_keycode = -1;
-        } else {
-            // 配對錯誤
-            target_dna->dele = true;
-            score -= 1;
-            current_keycode = -1;
-        }
+        } 
 
         // 一次處理一個輸入，所以清空
         current_keycode = -1;
@@ -136,13 +131,13 @@ bool check_match(dna *d, int keycode) {
     // C - G: 鍵盤 G (ALLEGRO_KEY_G)
 
     switch (d->type) {
-        case 1: // A
+        case 0: // A
             return keycode == ALLEGRO_KEY_T;
-        case 2: // T
+        case 1: // T
             return keycode == ALLEGRO_KEY_A;
-        case 3: // C
+        case 2: // C
             return keycode == ALLEGRO_KEY_G;
-        case 4: // G
+        case 3: // G
             return keycode == ALLEGRO_KEY_C;
         default:
             return false;

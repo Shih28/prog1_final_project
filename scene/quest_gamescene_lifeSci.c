@@ -1,10 +1,10 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-#include "quest_gamescene_3.h"
+#include "quest_gamescene_lifeSci.h"
 #include "../element/element.h"
 #include "../element/charater.h"
-#include "../element/floor.h"
+#include "../element/dna.h"
 #include "../element/teleport.h"
 #include "../element/questNode.h"
 #include "../element/projectile.h"
@@ -18,15 +18,15 @@
 int score = 0;
 int current_keycode = -1;
 /*
-   [questGame3 function]
+   [questLifeSci function]
 */
-Scene *New_questGame3(int label)
+Scene *New_questLifeSci(int label)
 {
-    questGame3 *pDerivedObj = (questGame3 *)malloc(sizeof(questGame3));
+    questLifeSci *pDerivedObj = (questLifeSci *)malloc(sizeof(questLifeSci));
     Scene *pObj = New_Scene(label);
 
     // setting derived object member
-    pDerivedObj->background = al_load_bitmap("assets/image/phys.png");
+    pDerivedObj->background = al_load_bitmap("assets/image/life_sci_ing.png");
     pObj->pDerivedObj = pDerivedObj;
 
     score = 0;
@@ -43,14 +43,14 @@ Scene *New_questGame3(int label)
     al_start_timer(lifeSci_gamescene_timer);
 
     // setting derived object function
-    pObj->Update = questGame3_update;
-    pObj->Draw = questGame3_draw;
-    pObj->Destroy = questGame3_destroy;
+    pObj->Update = questLifeSci_update;
+    pObj->Draw = questLifeSci_draw;
+    pObj->Destroy = questLifeSci_destroy;
 
     return pObj;
 }
 
-void questGame3_update(Scene *self)
+void questLifeSci_update(Scene *self)
 {
     // 偵測是否有輸入（只取一個鍵）
     if (key_state[ALLEGRO_KEY_A]){
@@ -99,14 +99,22 @@ void questGame3_update(Scene *self)
     if(current_time>=FPS*30)
     {
         self->scene_end=true;
+        window=LifeSci_endscene_L;
+    }
+
+     if(key_state[ALLEGRO_KEY_P]){
+        self->scene_end=true;
+        window=LifeSci_endscene_L;
+    }else if (key_state[ALLEGRO_KEY_B]){
+        self->scene_end=true;
         window=GameScene_L;
     }
     
 }
-void questGame3_draw(Scene *self)
+void questLifeSci_draw(Scene *self)
 {
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    questGame3 *gs = ((questGame3 *)(self->pDerivedObj));
+    questLifeSci *gs = ((questLifeSci *)(self->pDerivedObj));
     al_draw_bitmap(gs->background, 0, 0, 0);
     ElementVec allEle = _Get_all_elements(self);
     for (int i = 0; i < allEle.len; i++)
@@ -128,11 +136,12 @@ void questGame3_draw(Scene *self)
     }
 
 }
-void questGame3_destroy(Scene *self)
+void questLifeSci_destroy(Scene *self)
 {
-    questGame3 *Obj = ((questGame3 *)(self->pDerivedObj));
+    questLifeSci *Obj = ((questLifeSci *)(self->pDerivedObj));
     ALLEGRO_BITMAP *background = Obj->background;
     al_destroy_bitmap(background);
+    
     ElementVec allEle = _Get_all_elements(self);
     for (int i = 0; i < allEle.len; i++)
     {

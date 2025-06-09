@@ -151,11 +151,11 @@ bool game_update(Game *self)
         case quest_menu_phys_L:
             create_scene(quest_menu_phys_L);
             break;
-        case quest_menu_2_L:
-            create_scene(quest_menu_2_L);
+        case quest_menu_math_L:
+            create_scene(quest_menu_math_L);
             break;
-        case quest_menu_3_L:
-            create_scene(quest_menu_3_L);
+        case quest_menu_lifeSci_L:
+            create_scene(quest_menu_lifeSci_L);
             break;
         case quest_menu_lake_L:
             create_scene(quest_menu_lake_L);
@@ -166,8 +166,8 @@ bool game_update(Game *self)
         case Math_gamescene_L:
             create_scene(Math_gamescene_L);
             break;
-        case quest_gameScene_3_L:
-            create_scene(quest_gameScene_3_L);
+        case quest_gameScene_lifeSci_L:
+            create_scene(quest_gameScene_lifeSci_L);
             break;
         case quest_gameScene_lake_L:
             create_scene(quest_gameScene_lake_L);
@@ -178,6 +178,10 @@ bool game_update(Game *self)
         case Phys_endscene_L:
             create_scene(Phys_endscene_L);
             break;
+        case LifeSci_endscene_L:
+            create_scene(LifeSci_endscene_L);
+            break;
+        
         case Final_endscene_L:
             create_scene(Final_endscene_L);
             break;

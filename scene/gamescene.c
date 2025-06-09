@@ -22,8 +22,8 @@ Scene *New_gamescene(int label)
     // register element
     
     _Register_elements(pObj, New_questNode(questNode_L, 1450, 305, quest_menu_phys_L, al_load_bitmap("assets/image/phys.png")));
-    _Register_elements(pObj, New_questNode(questNode_L, 652, 260, quest_menu_2_L, al_load_bitmap("assets/image/quest_node_2.png")));
-    _Register_elements(pObj, New_questNode(questNode_L, 475, 70, quest_menu_3_L, al_load_bitmap("assets/image/quest_node_3.png")));
+    _Register_elements(pObj, New_questNode(questNode_L, 652, 260, quest_menu_math_L, al_load_bitmap("assets/image/quest_node_2.png")));
+    _Register_elements(pObj, New_questNode(questNode_L, 475, 70, quest_menu_lifeSci_L, al_load_bitmap("assets/image/quest_node_3.png")));
     _Register_elements(pObj, New_questNode(questNode_L, 110, 490, quest_menu_lake_L, al_load_bitmap("assets/image/lake.png")));
     
 
