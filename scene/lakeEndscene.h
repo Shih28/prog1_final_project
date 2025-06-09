@@ -10,11 +10,9 @@
 typedef struct _lakeEndscene
 {
     ALLEGRO_FONT *font;
-    ALLEGRO_SAMPLE *song;
-    ALLEGRO_SAMPLE_INSTANCE *sample_instance;
     ALLEGRO_BITMAP *img;
     char score[15];
-    int title_x, title_y;
+
 }lakeEndscene;
 Scene *New_lakeEndscene(int label);
 void lakeEndscene_update(Scene *self);

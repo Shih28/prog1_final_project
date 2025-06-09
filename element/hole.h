@@ -17,7 +17,7 @@ typedef struct _hole {
     Elements *ball_in_hole; // 指向目前在坑中的球，若無則為 NULL
 } hole;
 
-Elements *New_hole(int label, int x, int y, int id);
+Elements *New_hole(int label, int id, int x, int y);
 void hole_update(Elements *self);
 void hole_draw(Elements *self);
 void hole_interact(Elements *self);

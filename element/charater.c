@@ -29,11 +29,7 @@ Elements *New_Character(int label)
         sprintf(buffer, "assets/image/char2_%s.gif", state_string[i]);
         pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
     }
-    // load effective sound
-    ALLEGRO_SAMPLE *sample = al_load_sample("assets/sound/atk_sound.wav");
-    pDerivedObj->atk_Sound = al_create_sample_instance(sample);
-    al_set_sample_instance_playmode(pDerivedObj->atk_Sound, ALLEGRO_PLAYMODE_ONCE);
-    al_attach_sample_instance_to_mixer(pDerivedObj->atk_Sound, al_get_default_mixer());
+
 
     // initial the geometric information of character
     pDerivedObj->width = pDerivedObj->gif_status[0]->width;
@@ -147,16 +143,11 @@ void Character_draw(Elements *self)
     {
         al_draw_bitmap(frame, chara->x, chara->y, ((chara->dir) ? 0:ALLEGRO_FLIP_HORIZONTAL));
     }
-    if (chara->state == ATK && chara->gif_status[chara->state]->display_index == 2)
-    {
-        al_play_sample_instance(chara->atk_Sound);
-    }
     // al_draw_rectangle(chara->x, chara->y, chara->x+chara->width, chara->y+chara->height, al_map_rgb(255,255,255), 1);
 }
 void Character_destory(Elements *self)
 {
     Character *Obj = ((Character *)(self->pDerivedObj));
-    al_destroy_sample_instance(Obj->atk_Sound);
     for (int i = 0; i < 2; i++)
         algif_destroy_animation(Obj->gif_status[i]);
     free(Obj->hitbox);

@@ -3,39 +3,37 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-#include "life_sciend.h"
-#include "quest_gamescene_lifeSci.h"
+#include "mathEndscene.h"
+#include "quest_gamescene_math.h"
 #include "sceneManager.h"
 #include <stdbool.h>
 /*
-   [lakeEndscene function]
+   [mathEndscene function]
 */
-
-Scene *New_life_sciend(int label)
+Scene *New_mathEndscene(int label)
 {
-    life_sciend *pDerivedObj = (life_sciend*)malloc(sizeof(life_sciend));
+    mathEndscene *pDerivedObj = (mathEndscene*)malloc(sizeof(mathEndscene));
     Scene *pObj = New_Scene(label);
-    pDerivedObj->img=al_load_bitmap("assets/image/life_sci_2.png");
+    pDerivedObj->img=al_load_bitmap("assets/image/math_end.png");
     // setting derived object member
     pDerivedObj->font = al_load_ttf_font("assets/font/pirulen.ttf", 95, 0);
-    
     pObj->pDerivedObj = pDerivedObj;
 
     //set score
-    // sprintf(pDerivedObj->score, "%d", score_of_lake_quest);
+    sprintf(pDerivedObj->score, "%d", score_of_Math_quest);
 
     // setting derived object function
-    pObj->Update = life_sciend_update;
-    pObj->Draw = life_sciend_draw;
-    pObj->Destroy = life_sciend_destroy;
+    pObj->Update = mathEndscene_update;
+    pObj->Draw = mathEndscene_draw;
+    pObj->Destroy = mathEndscene_destroy;
     return pObj;
 }
-void life_sciend_update(Scene *self)
+void mathEndscene_update(Scene *self)
 {
     if (key_state[ALLEGRO_KEY_ENTER])
     {
         self->scene_end = true;
-        QuestComp[QuestLifeSci_L]=1;
+        QuestComp[QuestMath_L]=1;
         key_state[ALLEGRO_KEY_ENTER]=0;
         for(int i=0; i<4; i++){
             if(QuestComp[i]==0){
@@ -45,21 +43,19 @@ void life_sciend_update(Scene *self)
             if(i==3 && QuestComp[i]) window=outro_1_L;
         }
     }
+    return;
 }
-void life_sciend_draw(Scene *self)
+void mathEndscene_draw(Scene *self)
 {
-    life_sciend *Obj = ((life_sciend *)(self->pDerivedObj));
+    mathEndscene *Obj = ((mathEndscene *)(self->pDerivedObj));
     al_draw_bitmap(Obj->img,0,0,0);
-    char buf[15];
-    sprintf(buf, "%d",score_of_lifeSci);
-    al_draw_text(Obj->font, al_map_rgb(0,0,0), 1190 ,342, ALLEGRO_ALIGN_CENTRE, buf);
+    al_draw_text(Obj->font, al_map_rgb(0,0,0), 970 ,610, ALLEGRO_ALIGN_CENTRE, Obj->score);
     
 }
-void life_sciend_destroy(Scene *self)
+void mathEndscene_destroy(Scene *self)
 {
-    life_sciend *Obj = ((life_sciend *)(self->pDerivedObj));
+    mathEndscene *Obj = ((mathEndscene *)(self->pDerivedObj));
     al_destroy_font(Obj->font);
-    
     al_destroy_bitmap(Obj->img);
     free(Obj);
     free(self);

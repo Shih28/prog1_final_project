@@ -27,11 +27,7 @@ Elements *New_CharacterGauss(int label)
         sprintf(buffer, "assets/image/char3_%s.gif", state_string[i]);
         pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
     }
-    // load effective sound
-    ALLEGRO_SAMPLE *sample = al_load_sample("assets/sound/atk_sound.wav");
-    pDerivedObj->atk_Sound = al_create_sample_instance(sample);
-    al_set_sample_instance_playmode(pDerivedObj->atk_Sound, ALLEGRO_PLAYMODE_ONCE);
-    al_attach_sample_instance_to_mixer(pDerivedObj->atk_Sound, al_get_default_mixer());
+    
 
     // initial the geometric information of CharacterGauss
     pDerivedObj->width = pDerivedObj->gif_status[0]->width;
@@ -102,13 +98,13 @@ void CharacterGauss_update(Elements *self)
         if (key_state[ALLEGRO_KEY_A])
         {
             chara->dir = false;
-            CharacterGauss_update_position(self, -5, 0);
+            CharacterGauss_update_position(self, -7, 0);
             chara->state = MOVE;
         }
         else if (key_state[ALLEGRO_KEY_D])
         {
             chara->dir = true;
-            CharacterGauss_update_position(self, 5, 0);
+            CharacterGauss_update_position(self, 7, 0);
             chara->state = MOVE;
         }
         else
@@ -132,7 +128,6 @@ void CharacterGauss_draw(Elements *self)
 void CharacterGauss_destory(Elements *self)
 {
     CharacterGauss *Obj = ((CharacterGauss *)(self->pDerivedObj));
-    al_destroy_sample_instance(Obj->atk_Sound);
     for (int i = 0; i < 2; i++)
         algif_destroy_animation(Obj->gif_status[i]);
     free(Obj->hitbox);
@@ -144,8 +139,9 @@ void CharacterGauss_interact_ball(Elements *self, Elements *inputBall) {
     CharacterGauss *ch = (CharacterGauss *)(self->pDerivedObj);
     ball *b = (ball *)(inputBall->pDerivedObj);
 
-    if (ch->carried_ball == NULL && ch->hitbox->overlap(ch->hitbox, b->hitbox)) {
+    if (ch->carried_ball == NULL && key_state[ALLEGRO_KEY_F] && ch->hitbox->overlap(ch->hitbox, b->hitbox)) {
         ch->carried_ball = inputBall;
+        key_state[ALLEGRO_KEY_F]=0;
         printf("Picked up a ball!\n");
     }
 }
@@ -153,11 +149,14 @@ void CharacterGauss_interact_ball(Elements *self, Elements *inputBall) {
 void CharacterGauss_interact_hole(Elements *self, Elements *inputHole) {
     CharacterGauss *chara = (CharacterGauss *)(self->pDerivedObj);
     hole *h = (hole *)(inputHole->pDerivedObj);
+    // printf("hole: %d\n", chara->hitbox->overlap(chara->hitbox, h->hitbox));
 
-    if (key_state[ALLEGRO_KEY_F] && chara->carried_ball && chara->hitbox->overlap(chara->hitbox, h->hitbox)) {
+    if (key_state[ALLEGRO_KEY_F] && chara->hitbox->overlap(chara->hitbox, h->hitbox)) {
+
         // 取得坑的中心點位置
         int hole_cx = h->x + h->width / 2;
         int hole_cy = h->y + h->height / 2;
+        key_state[ALLEGRO_KEY_F]=0;
 
         // 若坑裡有球，讓它回到角色頭上
         if (h->ball_in_hole != NULL) {
@@ -165,24 +164,28 @@ void CharacterGauss_interact_hole(Elements *self, Elements *inputHole) {
             ball *pb = (ball *)(prev_ball->pDerivedObj);
             // 設定新位置：角色頭頂
             pb->x = chara->x + chara->width / 2 - pb->width / 2;
-            pb->y = chara->y - pb->height;
+            pb->y = chara->y;
             // 更新 hitbox
             pb->hitbox->update_center_x(pb->hitbox, pb->x + pb->width / 2);
             pb->hitbox->update_center_y(pb->hitbox, pb->y + pb->height / 2);
-        }
 
-        // 把角色頭上的球放進坑裡
-        ball *cb = (ball *)(chara->carried_ball->pDerivedObj);
-        cb->x = hole_cx - cb->width / 2;
-        cb->y = hole_cy - cb->height / 2;
-        cb->hitbox->update_center_x(cb->hitbox, cb->x + cb->width / 2);
-        cb->hitbox->update_center_y(cb->hitbox, cb->y + cb->height / 2);
+        }
+        if(chara->carried_ball!=NULL){
+            // 把角色頭上的球放進坑裡
+            ball *cb = (ball *)(chara->carried_ball->pDerivedObj);
+            cb->x = hole_cx - cb->width / 2;
+            cb->y = hole_cy - cb->height / 2;
+            cb->hitbox->update_center_x(cb->hitbox, cb->x + cb->width / 2);
+            cb->hitbox->update_center_y(cb->hitbox, cb->y + cb->height / 2);
+        }
+        
 
         // 完成交換
         Elements *tmp = h->ball_in_hole;
         h->ball_in_hole = chara->carried_ball;
         chara->carried_ball = tmp;
     }
+    
 }
 
 

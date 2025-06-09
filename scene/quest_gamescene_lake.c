@@ -10,8 +10,7 @@
 #include "../global.h"
 #include "stdio.h"
 int score_of_lake_quest=0;
-
-
+int speed;
 
 /*
    [questGameLake function]

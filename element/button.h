@@ -7,12 +7,13 @@ typedef struct button{
     int x;
     int y;
     int width, height;
-    int change_scene;
-    ALLEGRO_BITMAP *img;
+    int gamespeed;
+    ALLEGRO_BITMAP *img[2];
+    ALLEGRO_BITMAP *display;
     Shape *hitbox;
 }button;
 
-Elements *New_button(int label, int x, int y, ALLEGRO_BITMAP *img, int change_scene);
+Elements *New_button(int label, int x, int y, ALLEGRO_BITMAP *img, ALLEGRO_BITMAP *img2, int v);
 void button_update(Elements *self);
 void button_interact(Elements *self);
 void button_destroy(Elements *self);

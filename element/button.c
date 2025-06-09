@@ -4,16 +4,19 @@
 #include "../scene/quest_menu.h"
 #include "../shapes/Shape.h"
 #include "../shapes/Point.h"
+#include "../scene/quest_gamescene_lake.h"
 
 
-Elements *New_button(int label, int x, int y, ALLEGRO_BITMAP *img, int change_scene){
+Elements *New_button(int label, int x, int y, ALLEGRO_BITMAP *img, ALLEGRO_BITMAP *img2, int v){
     button *pDerivedObj = (button*)malloc(sizeof(button));
     Elements* pobj = New_Elements(label);
     
     pDerivedObj->x=x;
     pDerivedObj->y=y;
-    pDerivedObj->img=img;
-    pDerivedObj->change_scene=change_scene;
+    pDerivedObj->img[0]=img;
+    pDerivedObj->img[1]=img2;
+    pDerivedObj->display=img;
+    pDerivedObj->gamespeed=v;
     pDerivedObj->width = al_get_bitmap_width(img);
     pDerivedObj->height = al_get_bitmap_height(img);
     pDerivedObj->hitbox = New_Rectangle(pDerivedObj->x + pDerivedObj->width / 3,
@@ -30,24 +33,18 @@ Elements *New_button(int label, int x, int y, ALLEGRO_BITMAP *img, int change_sc
     return pobj;
 }
 
-// bool mouse_clicked(double x1, double y1, double x2, double y2){
-//     if(mouse.x>=rec->x1 && mouse.x<=rec->x2
-//     && mouse.y>=rec->y1 && mouse.y<=rec->y2
-//     && event.type==ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-//         return true;
-//     }
-//     return false;
-// }
-
 void button_update(Elements *self){
     
     button *obj = (button*)self->pDerivedObj;
-    // printf("%d", obj->hitbox->overlap(New_Rectangle(mouse.x-1, mouse.y-1, mouse.x+1, mouse.y+1), obj->hitbox));
-    if(obj->hitbox->overlap(New_Point(mouse.x, mouse.y), obj->hitbox) && mouse_state[1]){
-        scene->scene_end=true;
-        window=obj->change_scene;
+    if(obj->hitbox->overlap(New_Point(mouse.x, mouse.y), obj->hitbox)){
+        obj->display=obj->img[1];
+        if(mouse_state[1]){
+            scene->scene_end=true;
+            window=quest_gameScene_lake_L;
+        }
+    }else{
+        obj->display=obj->img[0];
     }
-    
 }
 
 void button_interact(Elements *self){
@@ -57,12 +54,14 @@ void button_interact(Elements *self){
 void button_draw(Elements *self){
 
     button *obj = (button*)self->pDerivedObj;
-    al_draw_bitmap(obj->img, obj->x, obj->y, 0);
+    al_draw_bitmap(obj->img[0], obj->x, obj->y, 0);
 }
 
 void button_destroy(Elements *self){
     button *obj=(button*)self->pDerivedObj;
-    al_destroy_bitmap(obj->img);
+    al_destroy_bitmap(obj->img[0]);
+    al_destroy_bitmap(obj->img[1]);
+    
     free(obj->hitbox);
     free(obj);
     free(self);

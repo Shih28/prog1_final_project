@@ -14,7 +14,7 @@
    [Hole Function Implementation]
 */
 
-Elements *New_hole(int label, int x, int y, int id) {
+Elements *New_hole(int label, int id, int x, int y) {
     hole *pDerivedObj = (hole *)malloc(sizeof(hole));
     Elements *pObj = New_Elements(label);
 
@@ -101,7 +101,6 @@ void hole_draw(Elements *self) {
     hole *Obj = (hole *)(self->pDerivedObj);
     al_draw_bitmap(Obj->img, Obj->x, Obj->y, 0);
 
-    // 若已經正確配對，可以畫個提示
     if (Obj->correct) {
         al_draw_circle(Obj->x + Obj->width / 2, Obj->y + Obj->height / 2, 10, al_map_rgb(0, 255, 0), 3);
     }

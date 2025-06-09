@@ -117,7 +117,6 @@ void CharacterNewton_draw(Elements *self)
 void CharacterNewton_destory(Elements *self)
 {
     CharacterNewton *Obj = ((CharacterNewton *)(self->pDerivedObj));
-    al_destroy_sample_instance(Obj->atk_Sound);
     for (int i = 0; i < 2; i++)
         algif_destroy_animation(Obj->gif_status[i]);
     free(Obj->hitbox);
@@ -142,7 +141,8 @@ void CharacterNewton_interact_apple(Elements *self, Elements *tar){
     if(chra->hitbox->overlap(chra->hitbox, app->hitbox)){
         printf("HIT_apple");
         int add = (app->type==AppleRight_L)? 1:-1;
-        score_of_phys_quest+=add;
+        
+        score_of_phys_quest = max(score_of_phys_quest+add, 0);
         tar->dele=true;
     }
 }

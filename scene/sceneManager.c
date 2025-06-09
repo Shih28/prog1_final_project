@@ -5,8 +5,10 @@
 #include "quest_gamescene_math.h"
 #include "quest_gamescene_lifeSci.h"
 #include "quest_gamescene_lake.h"
+
 #include "lakeEndscene.h"
 #include "physEndscene.h"
+#include "mathEndscene.h"
 #include "life_sciend.h"
 #include "quest_menu.h"
 #include "finalEndscene.h"
@@ -26,7 +28,7 @@ void create_scene(SceneType type)
         scene = New_quest_menu(quest_menu_phys_L, quest_gameScene_phys_L, al_load_bitmap("assets/image/phys_intro.png"));
         break;
     case quest_menu_math_L:
-        scene = New_quest_menu(quest_menu_math_L, Math_gamescene_L, al_load_bitmap("assets/image/quest_menu.jpg"));
+        scene = New_quest_menu(quest_menu_math_L, Math_gamescene_L, al_load_bitmap("assets/image/math_intro.png"));
         break;
     case quest_menu_lifeSci_L:
         scene = New_quest_menu(quest_menu_lifeSci_L, quest_gameScene_lifeSci_L,al_load_bitmap("assets/image/life_sci_1.png"));
@@ -75,9 +77,13 @@ void create_scene(SceneType type)
     case LifeSci_endscene_L:
         scene = New_life_sciend(LifeSci_endscene_L);
         break;
+    case Math_endscene_L:
+        scene = New_mathEndscene(Math_endscene_L);
+        break;
     case Final_endscene_L:
         scene = New_finalEndscene(Final_endscene_L);
         break;
+  
     
     default:
         break;

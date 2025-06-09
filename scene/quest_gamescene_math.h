@@ -7,9 +7,9 @@
 */
 typedef enum QuestGameMathEle
 {
-    Ball_L=0,
-    Hole_L=1,
-    CharacterGauss_L=2
+    Hole_L=0,
+    CharacterGauss_L=1,
+    Ball_L=2,
 } QuestGameMathEle;
 
 typedef struct _questGameMath
@@ -23,6 +23,8 @@ Scene *New_questGameMath(int label);
 void questGameMath_update(Scene *self);
 void questGameMath_draw(Scene *self);
 void questGameMath_destroy(Scene *self);
-int checkMatching(Scene *self);
+void checkMatching(Scene *self);
+int all_holes_have_balls(Scene *self);
+extern int score_of_Math_quest;
 
 #endif

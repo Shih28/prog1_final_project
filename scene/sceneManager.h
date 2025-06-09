@@ -23,6 +23,7 @@ typedef enum SceneType
     Final_endscene_L,
     LifeSci_endscene_L,
     Math_endscene_L,
+    Pre_lake_L,
     outro_1_L,
     outro_2_L
     

@@ -10,8 +10,6 @@
 typedef struct _finalEndscene
 {
     ALLEGRO_FONT *font;
-    ALLEGRO_SAMPLE *song;
-    ALLEGRO_SAMPLE_INSTANCE *sample_instance;
     ALLEGRO_BITMAP *img;
     
     int title_x, title_y;

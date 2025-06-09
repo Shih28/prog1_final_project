@@ -196,6 +196,10 @@ bool game_update(Game *self)
          case outro_2_L:
             create_scene(outro_2_L);
             break;
+         case Math_endscene_L:
+            create_scene(Math_endscene_L);
+            break;
+        
             
         
         case -1:

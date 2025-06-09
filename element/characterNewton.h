@@ -22,7 +22,6 @@ typedef struct CharacterNewton
     int state;                      // the state of CharacterNewton
     int v;
     ALGIF_ANIMATION *gif_status[3]; // gif for each state. 0: stop, 1: move, 2:attack
-    ALLEGRO_SAMPLE_INSTANCE *atk_Sound;
     int anime;      // counting the time of animation
     int anime_time; // indicate how long the animation
     bool new_proj;

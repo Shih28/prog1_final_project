@@ -8,6 +8,7 @@
 #include "quest_gamescene_lake.h"
 #include "quest_gamescene_lifeSci.h"
 #include "quest_gamescene_phys.h"
+#include "quest_gamescene_math.h"
 #include "sceneManager.h"
 #include <stdbool.h>
 /*
@@ -25,7 +26,7 @@ Scene *New_finalEndscene(int label)
     pObj->pDerivedObj = pDerivedObj;
 
     //set score
-    total_score=score_of_lake_quest+score_of_lifeSci+score_of_phys_quest;
+    total_score=score_of_lake_quest+score_of_lifeSci+score_of_phys_quest+score_of_Math_quest;
 
     // setting derived object function
     pObj->Update = finalEndscene_update;
