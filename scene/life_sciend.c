@@ -14,7 +14,7 @@ Scene *New_life_sciend(int label)
 {
     life_sciend *pDerivedObj = (life_sciend*)malloc(sizeof(life_sciend));
     Scene *pObj = New_Scene(label);
-    pDerivedObj->img=al_load_bitmap("assets/image/phys.png");
+    pDerivedObj->img=al_load_bitmap("assets/image/life_sci_2.png");
     // setting derived object member
     pDerivedObj->font = al_load_ttf_font("assets/font/pirulen.ttf", 95, 0);
     
