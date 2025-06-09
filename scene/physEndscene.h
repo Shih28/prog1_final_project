@@ -10,11 +10,8 @@
 typedef struct _physEndscene
 {
     ALLEGRO_FONT *font;
-    ALLEGRO_SAMPLE *song;
-    ALLEGRO_SAMPLE_INSTANCE *sample_instance;
     ALLEGRO_BITMAP *img;
     char score[15];
-    int title_x, title_y;
 }physEndscene;
 Scene *New_physEndscene(int label);
 void physEndscene_update(Scene *self);

@@ -15,24 +15,14 @@ Scene *New_finalEndscene(int label)
     finalEndscene *pDerivedObj = (finalEndscene*)malloc(sizeof(finalEndscene));
     Scene *pObj = New_Scene(label);
     // setting derived object member
+    char buf[40];
     pDerivedObj->font = al_load_ttf_font("assets/font/pirulen.ttf", 95, 0);
+    for(int i=0; i<3; i++){
+        sprintf(buf, "assets/image/end_%d", i);
+        pDerivedObj->img[i] = al_load_bitmap(buf);
+    }
 
-    pDerivedObj->img = al_load_bitmap("assets/image/phys.png");
 
-    sprintf(pDerivedObj->score, "%d", score_of_phys_quest);
-
-    // Load sound
-    pDerivedObj->song = al_load_sample("assets/sound/finalEndscene.mp3");
-    al_reserve_samples(20);
-    pDerivedObj->sample_instance = al_create_sample_instance(pDerivedObj->song);
-    pDerivedObj->title_x = WIDTH / 2;
-    pDerivedObj->title_y = HEIGHT / 2;
-    // Loop the song until the display closes
-    al_set_sample_instance_playmode(pDerivedObj->sample_instance, ALLEGRO_PLAYMODE_LOOP);
-    al_restore_default_mixer();
-    al_attach_sample_instance_to_mixer(pDerivedObj->sample_instance, al_get_default_mixer());
-    // set the volume of instance
-    al_set_sample_instance_gain(pDerivedObj->sample_instance, 0.1);
     pObj->pDerivedObj = pDerivedObj;
     // setting derived object function
     pObj->Update = finalEndscene_update;
@@ -52,8 +42,7 @@ void finalEndscene_update(Scene *self)
 void finalEndscene_draw(Scene *self)
 {
     finalEndscene *Obj = ((finalEndscene *)(self->pDerivedObj));
-    al_draw_bitmap(Obj->img, 0,0,0);
-    al_draw_text(Obj->font, al_map_rgb(0,0,0), 1205, 500, ALLEGRO_ALIGN_CENTRE, Obj->score);
+    al_draw_bitmap(Obj->img[0], 0,0,0);
 }
 void finalEndscene_destroy(Scene *self)
 {

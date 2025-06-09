@@ -10,11 +10,7 @@
 typedef struct _finalEndscene
 {
     ALLEGRO_FONT *font;
-    ALLEGRO_SAMPLE *song;
-    ALLEGRO_SAMPLE_INSTANCE *sample_instance;
-    ALLEGRO_BITMAP *img;
-    char score[15];
-    int title_x, title_y;
+    ALLEGRO_BITMAP *img[3];
 }finalEndscene;
 Scene *New_finalEndscene(int label);
 void finalEndscene_update(Scene *self);

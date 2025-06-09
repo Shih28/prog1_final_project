@@ -20,19 +20,7 @@ Scene *New_physEndscene(int label)
     pDerivedObj->img = al_load_bitmap("assets/image/phys_end.png");
 
     sprintf(pDerivedObj->score, "%d", score_of_phys_quest);
-
-    // Load sound
-    pDerivedObj->song = al_load_sample("assets/sound/physEndscene.mp3");
-    al_reserve_samples(20);
-    pDerivedObj->sample_instance = al_create_sample_instance(pDerivedObj->song);
-    pDerivedObj->title_x = WIDTH / 2;
-    pDerivedObj->title_y = HEIGHT / 2;
-    // Loop the song until the display closes
-    al_set_sample_instance_playmode(pDerivedObj->sample_instance, ALLEGRO_PLAYMODE_LOOP);
-    al_restore_default_mixer();
-    al_attach_sample_instance_to_mixer(pDerivedObj->sample_instance, al_get_default_mixer());
-    // set the volume of instance
-    al_set_sample_instance_gain(pDerivedObj->sample_instance, 0.1);
+   
     pObj->pDerivedObj = pDerivedObj;
     // setting derived object function
     pObj->Update = physEndscene_update;
