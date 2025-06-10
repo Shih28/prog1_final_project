@@ -42,6 +42,9 @@ void finalEndscene_update(Scene *self)
         memset(QuestComp,0,sizeof(int));
         window=GameScene_L;
     }
+    if(key_state[ALLEGRO_KEY_P]){
+        exit(0);
+    }
     return;
 }
 void finalEndscene_draw(Scene *self)
